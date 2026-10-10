@@ -1,0 +1,15 @@
+{"error":null,"total_count":982,"nomore":false,"items":[
+{"itemid":27342482444,"shopid":1275798143,
+ "search_item_tracking":"{\"is_ads\":false,\"item_type_str\":\"organic\"}",
+ "item_card_displayed_asset":{"name":"AirPods Pro 3 (2025)","image":"ph-11134207-81ztl-mfkgizppuayw61","shop_location":"Calamba City, Laguna","seller_flag":{"name":"OFFICIAL_SHOP"},"sold_count":{"text":"10K+ sold"}},
+ "item_data":{"itemid":27342482444,"shopid":1275798143,
+   "item_card_display_price":{"price":1429000000,"strikethrough_price":1499000000,"original_price":1499000000},
+   "item_card_display_sold_count":{"historical_sold_count":15913,"historical_sold_count_text":"10K+ sold"},
+   "item_rating":{"rating_star":4.962221722509557,"rating_count":[4447,17,6,7,68,4349]},
+   "shop_data":{"shop_name":"Apple Flagship Store"}}},
+{"itemid":5,"shopid":6,
+ "search_item_tracking":"{\"is_ads\":true}",
+ "item_card_displayed_asset":{"name":"Sponsored earbuds","image":"abc"},
+ "item_data":{"itemid":5,"shopid":6,"item_card_display_price":{"price":9900000,"strikethrough_price":null}}},
+{"itemid":7,"shopid":8,"item_basic":{"itemid":7,"shopid":8,"name":"Old format item","price":25000000,"price_before_discount":0,"image":"def","historical_sold":42,"item_rating":{"rating_star":4.5,"rating_count":[10]}}}
+]}

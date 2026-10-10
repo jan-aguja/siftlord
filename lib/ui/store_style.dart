@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../stores/store_runner.dart';
 
 Color storeColor(String storeId) => switch (storeId) {
-      'lazada' => const Color(0xFF1A2EA8),
+      'lazada' => const Color(0xFF3D5AFE),
       'shopee' => const Color(0xFFEE4D2D),
+      'facebook' => const Color(0xFF1877F2),
       _ => Colors.grey,
     };
 
@@ -33,3 +34,41 @@ IconData statusIcon(StoreStatus s) => switch (s) {
       StoreStatus.needsVerification => Icons.shield_outlined,
       StoreStatus.failed => Icons.error_outline,
     };
+
+/// What each store calls its official-store tier.
+String mallLabel(String storeId) => switch (storeId) {
+      'lazada' => 'LazMall',
+      'shopee' => 'Mall',
+      _ => 'Official',
+    };
+
+String formatPriceRange(double low, double high) =>
+    low == high ? formatPeso(low) : '${formatPeso(low)}–${formatPeso(high)}';
+
+/// A small product picture, or a placeholder until one has been learned.
+class ProductThumb extends StatelessWidget {
+  const ProductThumb({super.key, required this.url, this.size = 36});
+
+  final String? url;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final placeholder = Icon(Icons.sell_outlined,
+        size: size * 0.55, color: Theme.of(context).colorScheme.onSurfaceVariant);
+    final u = url;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: Container(
+        width: size,
+        height: size,
+        color: u == null ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.white,
+        alignment: Alignment.center,
+        child: u == null
+            ? placeholder
+            : Image.network(u, fit: BoxFit.cover, width: size, height: size,
+                errorBuilder: (_, _, _) => placeholder),
+      ),
+    );
+  }
+}

@@ -21,8 +21,15 @@ class WebViewConfig {
     return _userAgent = ua;
   }
 
-  static Future<InAppWebViewSettings> settings() async => InAppWebViewSettings(
-        userAgent: await userAgent(),
+  /// A current desktop Safari, for stores whose mobile page lacks what we need.
+  static const desktopUserAgent =
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 '
+      '(KHTML, like Gecko) Version/18.6 Safari/605.1.15';
+
+  static Future<InAppWebViewSettings> settings({bool desktop = false}) async => InAppWebViewSettings(
+        userAgent: desktop ? desktopUserAgent : await userAgent(),
+        preferredContentMode:
+            desktop ? UserPreferredContentMode.DESKTOP : UserPreferredContentMode.RECOMMENDED,
         javaScriptEnabled: true,
         useShouldOverrideUrlLoading: true,
         mediaPlaybackRequiresUserGesture: true,

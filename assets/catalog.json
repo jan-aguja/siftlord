@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "notes": "Usual PH prices for products worth price-checking. Prices are pesos across variants, from official/Mall listings on the 'checked' date. Not meant to cover everything. Thumbnails are learned on the phone, not stored here.",
+  "products": [
+    {
+      "id": "airpods-pro-3",
+      "name": "Apple AirPods Pro 3",
+      "brand": "Apple",
+      "aliases": [
+        "airpods pro 3",
+        "airpods pro gen 3",
+        "airpods pro 3rd gen",
+        "airpods pro 3rd generation"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 14290,
+        "max": 14990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "airpods-4",
+      "name": "Apple AirPods 4",
+      "brand": "Apple",
+      "aliases": [
+        "airpods 4",
+        "airpods gen 4",
+        "airpods 4th gen",
+        "airpods 4th generation"
+      ],
+      "exclude": [
+        "ear tips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 8090,
+        "max": 8490
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "ipad-a16",
+      "name": "Apple iPad (A16, 11th gen)",
+      "brand": "Apple",
+      "aliases": [
+        "ipad a16",
+        "ipad 11th gen",
+        "ipad 11th generation",
+        "ipad gen 11"
+      ],
+      "exclude": [
+        "keyboard",
+        "folio",
+        "pencil",
+        "screen protector",
+        "paperlike"
+      ],
+      "price": {
+        "min": 31390,
+        "max": 59990
+      },
+      "checked": "2026-10-11",
+      "search": "apple ipad a16"
+    },
+    {
+      "id": "jbl-flip-7",
+      "name": "JBL Flip 7",
+      "brand": "JBL",
+      "aliases": [
+        "jbl flip 7",
+        "flip 7"
+      ],
+      "exclude": [],
+      "price": {
+        "min": 5565,
+        "max": 7999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "jbl-go-4",
+      "name": "JBL Go 4",
+      "brand": "JBL",
+      "aliases": [
+        "jbl go 4",
+        "go 4 speaker"
+      ],
+      "exclude": [],
+      "price": {
+        "min": 1699,
+        "max": 2599
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "nintendo-switch-2",
+      "name": "Nintendo Switch 2",
+      "brand": "Nintendo",
+      "aliases": [
+        "nintendo switch 2",
+        "switch 2",
+        "ns2"
+      ],
+      "exclude": [
+        "edition",
+        "pre order",
+        "game key card",
+        "amiibo",
+        "controller",
+        "joy con",
+        "dock",
+        "carrying",
+        "grip"
+      ],
+      "price": {
+        "min": 32999,
+        "max": 34995
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "stanley-quencher-40oz",
+      "name": "Stanley Quencher 40oz",
+      "brand": "Stanley",
+      "aliases": [
+        "stanley quencher 40oz",
+        "stanley quencher 40 oz",
+        "stanley 40oz",
+        "stanley tumbler 40oz"
+      ],
+      "exclude": [
+        "boot",
+        "handle"
+      ],
+      "price": {
+        "min": 2525,
+        "max": 3375
+      },
+      "checked": "2026-10-11"
+    }
+  ]
+}

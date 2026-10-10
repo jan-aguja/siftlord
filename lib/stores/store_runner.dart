@@ -38,6 +38,7 @@ class StoreRunner {
     }
 
     void blocked(PageKind kind, String? detail) {
+      if (kind == PageKind.login && !store.allowSignIn) kind = PageKind.normal;
       final status = kind == PageKind.login
           ? StoreStatus.needsLogin
           : kind == PageKind.verification
@@ -56,7 +57,7 @@ class StoreRunner {
 
     final webView = HeadlessInAppWebView(
       initialUrlRequest: URLRequest(url: WebUri.uri(store.searchUrl(query))),
-      initialSettings: await WebViewConfig.settings(),
+      initialSettings: await WebViewConfig.settings(desktop: store.desktopMode),
       initialUserScripts: UnmodifiableListView(scripts),
       onWebViewCreated: (controller) {
         controller.addJavaScriptHandler(

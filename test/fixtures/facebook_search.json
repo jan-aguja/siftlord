@@ -1,0 +1,7 @@
+{"listings":[
+ {"id":"1000000000000001","title":"Airpods pro gen 3","price":"4799.00","strike":null,"place":"Bacoor, Cavite","photo":"https://example.invalid/1.jpg","sold":false,"pending":false,"hidden":false,"delivery":["IN_PERSON","PUBLIC_MEETUP"]},
+ {"id":"1000000000000002","title":"Apple AirPods Pro 3 Preloved","price":"9000.00","strike":"10500.00","place":"Pasay City, Philippines","photo":"https://example.invalid/2.jpg","sold":false,"pending":false,"hidden":false,"delivery":["IN_PERSON","SHIPPING_OFFSITE"]},
+ {"id":"1000000000000003","title":"AirPods Pro 3 Brand New Sealed","price":"123.00","strike":null,"place":"Manila","photo":null,"sold":false,"pending":false,"hidden":false,"delivery":["IN_PERSON"]},
+ {"id":"1000000000000004","title":"Sold AirPods","price":"5000.00","strike":null,"place":"Manila","photo":null,"sold":true,"pending":false,"hidden":false,"delivery":[]},
+ {"id":"1000000000000005","title":"Free stuff","price":"0.00","strike":null,"place":"Manila","photo":null,"sold":false,"pending":false,"hidden":false,"delivery":[]}
+]}

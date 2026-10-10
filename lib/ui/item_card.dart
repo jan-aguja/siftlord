@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/item.dart';
+import '../pricing/price_check.dart';
 import 'store_style.dart';
+import 'theme.dart';
 
 /// Opens the product in the store's app if installed (universal / app links),
 /// otherwise in the browser.
@@ -10,10 +12,18 @@ Future<void> openItem(Item item) =>
     launchUrl(item.url, mode: LaunchMode.externalApplication);
 
 class ItemCard extends StatelessWidget {
-  const ItemCard({super.key, required this.item, required this.storeName});
+  const ItemCard({
+    super.key,
+    required this.item,
+    required this.storeName,
+    this.verdict = PriceVerdict.none,
+    this.ref,
+  });
 
   final Item item;
   final String storeName;
+  final PriceVerdict verdict;
+  final PriceReference? ref;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +36,20 @@ class ItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: Container(
-                color: Colors.white,
-                child: _Thumb(url: item.imageUrl, fit: BoxFit.contain),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    // Product photos are shot on white; keep it in both themes.
+                    color: Colors.white,
+                    child: _Thumb(url: item.imageUrl, fit: BoxFit.contain),
+                  ),
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -42,11 +59,19 @@ class ItemCard extends StatelessWidget {
                       style: theme.textTheme.titleMedium),
                   const SizedBox(height: 8),
                   _PriceLine(item: item, big: true),
+                  if (verdict != PriceVerdict.none) ...[
+                    const SizedBox(height: 8),
+                    PriceAlert(verdict: verdict, ref: ref),
+                  ],
                   const SizedBox(height: 6),
-                  _Meta(item: item),
+                  _Meta(item: item, storeName: storeName),
                   const SizedBox(height: 12),
                   FilledButton.icon(
-                    style: FilledButton.styleFrom(backgroundColor: storeColor(item.storeId)),
+                    style: FilledButton.styleFrom(
+                      backgroundColor: storeColor(item.storeId),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size.fromHeight(46),
+                    ),
                     onPressed: () => openItem(item),
                     icon: const Icon(Icons.open_in_new),
                     label: Text('Open in $storeName'),
@@ -62,10 +87,18 @@ class ItemCard extends StatelessWidget {
 }
 
 class ItemTile extends StatelessWidget {
-  const ItemTile({super.key, required this.item, required this.storeName});
+  const ItemTile({
+    super.key,
+    required this.item,
+    required this.storeName,
+    this.verdict = PriceVerdict.none,
+    this.ref,
+  });
 
   final Item item;
   final String storeName;
+  final PriceVerdict verdict;
+  final PriceReference? ref;
 
   @override
   Widget build(BuildContext context) {
@@ -93,15 +126,99 @@ class ItemTile extends StatelessWidget {
                   Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis),
                   const SizedBox(height: 4),
                   _PriceLine(item: item),
+                  if (verdict != PriceVerdict.none) ...[
+                    const SizedBox(height: 4),
+                    PriceAlert(verdict: verdict, ref: ref, compact: true),
+                  ],
                   const SizedBox(height: 4),
                   _Badges(item: item, storeName: storeName),
                   const SizedBox(height: 4),
-                  _Meta(item: item),
+                  _Meta(item: item, storeName: storeName),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// "Price looks off" (amber), "Big sale" (green) or "Third-party" (grey). A
+/// nudge to check the listing, never a claim that it's fake: it may be a
+/// case, a variant, a bundle, or a real sale.
+class PriceAlert extends StatelessWidget {
+  const PriceAlert({super.key, required this.verdict, required this.ref, this.compact = false});
+
+  final PriceVerdict verdict;
+
+  /// Null only for [PriceVerdict.thirdParty], which doesn't need a price.
+  final PriceReference? ref;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) {
+    final sift = SiftColors.of(context);
+    final r = ref;
+    final usual = r == null
+        ? ''
+        : r.entry != null
+            ? 'Usually ${formatPriceRange(r.low, r.high)}.'
+            : 'Official stores here: about ${formatPeso(r.low)}.';
+    final entry = r?.entry;
+    final (IconData icon, String title, String detail, Color bg, Color fg) = switch (verdict) {
+      PriceVerdict.thirdParty => (
+          Icons.extension_outlined,
+          'Third-party item',
+          entry?.brand != null
+              ? 'Says it\'s made for ${entry!.name}, so it\'s not by ${entry.brand}.'
+              : 'Says it\'s made for what you searched, not that it is it.',
+          sift.neutralBg,
+          sift.neutralFg,
+        ),
+      PriceVerdict.bigSale => (
+          Icons.local_offer,
+          'Big sale from an official store',
+          '$usual Worth a look, and check it\'s the right variant.',
+          sift.saleBg,
+          sift.saleFg,
+        ),
+      PriceVerdict.tooHigh => (
+          Icons.trending_up,
+          'Price looks high',
+          '$usual Check the variant or bundle.',
+          sift.warnBg,
+          sift.warnFg,
+        ),
+      _ => (
+          Icons.warning_amber_rounded,
+          'Price looks off',
+          '$usual Make sure it\'s genuine and the right item.',
+          sift.warnBg,
+          sift.warnFg,
+        ),
+    };
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: compact ? 3 : 6),
+      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(6)),
+      child: Row(
+        mainAxisSize: compact ? MainAxisSize.min : MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 16, color: fg),
+          const SizedBox(width: 6),
+          Flexible(
+            child: compact
+                ? Text(title, style: TextStyle(color: fg, fontSize: 12, fontWeight: FontWeight.w600))
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: TextStyle(color: fg, fontWeight: FontWeight.w600)),
+                      Text(detail, style: TextStyle(color: fg, fontSize: 12)),
+                    ],
+                  ),
+          ),
+        ],
       ),
     );
   }
@@ -157,32 +274,47 @@ class _Badges extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget badge(String text, Color color) => Container(
+    final scheme = Theme.of(context).colorScheme;
+    Widget badge(String text, Color color, {Color fg = Colors.white}) => Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(4)),
-          child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600)),
+          child: Text(text, style: TextStyle(color: fg, fontSize: 11, fontWeight: FontWeight.w600)),
         );
+    final tier = switch (item.sellerTier) {
+      SellerTier.mall => badge(mallLabel(item.storeId), scheme.onSurface, fg: scheme.surface),
+      SellerTier.preferredPlus => badge('Preferred+', const Color(0xFFD9480F)),
+      SellerTier.preferred => badge('Preferred', const Color(0xFFE8590C)),
+      SellerTier.regular => null,
+    };
     return Wrap(spacing: 6, runSpacing: 4, children: [
       badge(storeName, storeColor(item.storeId)),
-      if (item.isOfficial) badge('Official', Colors.black87),
-      if (item.isAd) badge('Ad', Colors.grey),
+      ?tier,
+      if (item.condition == Condition.used) badge('Used', const Color(0xFF868E96)),
+      if (item.condition == Condition.brandNew) badge('New', const Color(0xFF2B8A3E)),
+      if (item.isOverseas) badge('Overseas seller', const Color(0xFF6741D9)),
+      if (item.storePick != null) badge(item.storePick!, const Color(0xFF0B7285)),
+      if (item.isAd) badge('Ad', scheme.outline),
     ]);
   }
 }
 
 class _Meta extends StatelessWidget {
-  const _Meta({required this.item});
+  const _Meta({required this.item, required this.storeName});
 
   final Item item;
+  final String storeName;
 
   @override
   Widget build(BuildContext context) {
     final parts = <String>[
       if (item.rating != null && item.rating! > 0)
         '★ ${item.rating!.toStringAsFixed(1)}${item.ratingCount != null ? ' (${item.ratingCount})' : ''}',
-      if (item.soldText != null) item.soldText!,
-      if (item.location != null) item.location!,
-      if (item.shopName != null) item.shopName!,
+      ?item.soldText,
+      if (item.location != null)
+        item.secondhandMarket ? 'In ${item.location}' : 'Ships from ${item.location}',
+      ?item.deliveryNote,
+      if (item.fulfilledByStore) 'Fulfilled by $storeName',
+      ?item.shopName,
     ];
     return Text(parts.where((p) => p.trim().isNotEmpty).join(' · '),
         maxLines: 2,

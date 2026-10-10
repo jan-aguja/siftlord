@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 
 import '../models/item.dart';
+import '../pricing/price_check.dart';
+import '../pricing/pricing.dart';
 import '../queue/search_queue.dart';
+import '../stores/store_settings.dart';
 import 'item_card.dart';
 import 'store_status_chips.dart';
+import 'store_style.dart';
+import 'theme.dart';
 
 enum SortMode { bestMatch, priceLow, priceHigh, mostSold }
 
 /// Store-agnostic ordering: best match interleaves the stores' own rankings.
-List<Item> arrange(List<Item> items, {required SortMode sort, required bool hideAds}) {
-  final list = [for (final i in items) if (!hideAds || !i.isAd) i];
+List<Item> arrange(List<Item> items,
+    {required SortMode sort, required bool hideAds, Set<String> hiddenStores = const {}}) {
+  final list = [
+    for (final i in items)
+      if ((!hideAds || !i.isAd) && !hiddenStores.contains(i.storeId)) i,
+  ];
   int byRank(Item a, Item b) {
     final r = a.rank.compareTo(b.rank);
     return r != 0 ? r : a.storeId.compareTo(b.storeId);
@@ -29,9 +38,17 @@ List<Item> arrange(List<Item> items, {required SortMode sort, required bool hide
 }
 
 class ResultsScreen extends StatefulWidget {
-  const ResultsScreen({super.key, required this.queue, required this.job});
+  const ResultsScreen({
+    super.key,
+    required this.queue,
+    required this.pricing,
+    required this.settings,
+    required this.job,
+  });
 
   final SearchQueue queue;
+  final Pricing pricing;
+  final StoreSettings settings;
   final SearchJob job;
 
   @override
@@ -41,7 +58,8 @@ class ResultsScreen extends StatefulWidget {
 class _ResultsScreenState extends State<ResultsScreen> {
   SortMode _sort = SortMode.bestMatch;
   bool _hideAds = true;
-  bool _cards = true;
+  late bool _cards = !widget.settings.listView;
+  final Set<String> _hiddenStores = {};
   final _pages = PageController(viewportFraction: 0.92);
   int _page = 0;
 
@@ -60,23 +78,37 @@ class _ResultsScreenState extends State<ResultsScreen> {
           IconButton(
             tooltip: _cards ? 'List view' : 'Card view',
             icon: Icon(_cards ? Icons.view_list : Icons.view_carousel),
-            onPressed: () => setState(() => _cards = !_cards),
+            onPressed: () => setState(() {
+              _cards = !_cards;
+              widget.settings.listView = !_cards;
+            }),
           ),
         ],
       ),
       body: ListenableBuilder(
         listenable: widget.queue,
         builder: (context, _) {
-          final items = arrange(widget.job.items, sort: _sort, hideAds: _hideAds);
+          final all = widget.job.items;
+          final ref = widget.pricing.check.reference(widget.job.query, all);
+          final items = arrange(all, sort: _sort, hideAds: _hideAds, hiddenStores: _hiddenStores);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: StoreStatusChips(queue: widget.queue, job: widget.job),
+                child: StoreStatusChips(
+                  queue: widget.queue,
+                  job: widget.job,
+                  hidden: _hiddenStores,
+                  onToggle: (id) => setState(() {
+                    if (!_hiddenStores.remove(id)) _hiddenStores.add(id);
+                    _jumpToStart();
+                  }),
+                ),
               ),
+              if (ref != null) _ReferenceBar(ref: ref, pricing: widget.pricing),
               _controls(items.length),
-              Expanded(child: _body(items)),
+              Expanded(child: _body(items, ref)),
             ],
           );
         },
@@ -126,7 +158,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
     if (_pages.hasClients) _pages.jumpToPage(0);
   }
 
-  Widget _body(List<Item> items) {
+  Widget _body(List<Item> items, PriceReference? ref) {
+    final check = widget.pricing.check;
     if (items.isEmpty) {
       return Center(
         child: widget.job.isRunning
@@ -138,7 +171,11 @@ class _ResultsScreenState extends State<ResultsScreen> {
       return ListView.separated(
         itemCount: items.length,
         separatorBuilder: (_, _) => const Divider(height: 1),
-        itemBuilder: (_, i) => ItemTile(item: items[i], storeName: _storeName(items[i])),
+        itemBuilder: (_, i) => ItemTile(
+            item: items[i],
+            storeName: _storeName(items[i]),
+            verdict: check.verdict(items[i], ref, widget.job.query),
+            ref: ref),
       );
     }
     return PageView.builder(
@@ -147,10 +184,79 @@ class _ResultsScreenState extends State<ResultsScreen> {
       onPageChanged: (i) => setState(() => _page = i),
       itemBuilder: (_, i) => Padding(
         padding: const EdgeInsets.fromLTRB(4, 8, 4, 24),
-        child: ItemCard(item: items[i], storeName: _storeName(items[i])),
+        child: ItemCard(
+            item: items[i],
+            storeName: _storeName(items[i]),
+            verdict: check.verdict(items[i], ref, widget.job.query),
+            ref: ref),
       ),
     );
   }
 
   String _storeName(Item item) => widget.queue.store(item.storeId).name;
+}
+
+/// The usual price these results are checked against, and where it came from.
+class _ReferenceBar extends StatelessWidget {
+  const _ReferenceBar({required this.ref, required this.pricing});
+
+  final PriceReference ref;
+  final Pricing pricing;
+
+  static const _months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final entry = ref.entry;
+    final String title;
+    final String detail;
+    final String label;
+    if (entry != null) {
+      label = 'USUAL PRICE';
+      title = '${entry.name} · ${formatPriceRange(ref.low, ref.high)}';
+      detail = 'Sift Lord price list, checked ${_months[entry.checked.month - 1]} ${entry.checked.year}';
+    } else {
+      label = 'OFFICIAL STORES';
+      title = 'About ${formatPeso(ref.low)}';
+      detail = 'Middle price of ${ref.officialCount} official-store listings here';
+    }
+    final sift = SiftColors.of(context);
+    return ListenableBuilder(
+      listenable: pricing.thumbnails,
+      builder: (context, _) => Container(
+        margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: sift.panel,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: sift.hairline),
+          boxShadow: [BoxShadow(color: sift.glow.withValues(alpha: 0.12), blurRadius: 18)],
+        ),
+        child: Row(
+          children: [
+            if (entry != null) ...[
+              ProductThumb(url: pricing.thumbnails.forProduct(entry.id), size: 36),
+              const SizedBox(width: 10),
+            ] else ...[
+              Icon(Icons.storefront, color: theme.colorScheme.primary),
+              const SizedBox(width: 10),
+            ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: sectionLabel(context)),
+                  const SizedBox(height: 2),
+                  Text(title, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+                  Text(detail,
+                      style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

@@ -89,7 +89,13 @@ $jsSendHelper
       final title = e['name'] as String?;
       final url = _url(e['itemUrl'] as String?);
       if (price == null || title == null || url == null) continue;
-      final soldText = (e['itemSoldCntShow'] as String?)?.trim();
+      final soldText = blankToNull(e['itemSoldCntShow']);
+      final biz = {
+        for (final ic in (e['icons'] as List? ?? const []))
+          if (ic is Map) '${ic['bizType']}',
+      };
+      final location = prettyLocation(e['location']);
+      final brand = blankToNull(e['brandName']);
       items.add(Item(
         storeId: id,
         rank: i,
@@ -100,12 +106,19 @@ $jsSendHelper
         imageUrl: e['image'] as String?,
         rating: double.tryParse('${e['ratingScore']}'),
         ratingCount: int.tryParse('${e['review']}'),
-        soldText: soldText == null || soldText.isEmpty ? null : soldText,
+        soldText: soldText,
         soldCount: parseSoldText(soldText),
-        location: _blankToNull(e['location']),
-        shopName: _blankToNull(e['sellerName']),
+        location: location,
+        shopName: blankToNull(e['sellerName']),
+        brand: brand == 'No Brand' ? null : brand,
         isAd: e['isSponsored'] == true || '${e['adFlag']}' == '1',
-        isOfficial: '${e['icons']}'.contains('LazMall'),
+        sellerTier: biz.contains('lazMall') ? SellerTier.mall : SellerTier.regular,
+        isOverseas: isForeignLocation(location),
+        storePick: biz.contains('lazPick')
+            ? 'LazPick'
+            : biz.contains('choice')
+                ? 'Lazada Choice'
+                : null,
       ));
     }
     return items;
@@ -116,9 +129,4 @@ $jsSendHelper
     final full = raw.startsWith('//') ? 'https:$raw' : raw;
     return Uri.tryParse(full);
   }
-}
-
-String? _blankToNull(Object? v) {
-  final s = v?.toString().trim();
-  return s == null || s.isEmpty ? null : s;
 }

@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_inappwebview: 6.2.0-beta.3
   url_launcher: ^6.3.3
+  shared_preferences: ^2.5.6
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +48,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -58,6 +61,17 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/catalog.json
+    - assets/icon/siftlord_icon.png
+  fonts:
+    # Brand/display face only (titles, section labels). SIL OFL, see
+    # assets/fonts/Orbitron-OFL.txt. Variable font: set weight with
+    # fontVariations, not fontWeight.
+    - family: Orbitron
+      fonts:
+        - asset: assets/fonts/Orbitron-Variable.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

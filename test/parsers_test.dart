@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:siftlord/models/item.dart';
+import 'package:siftlord/stores/facebook.dart';
 import 'package:siftlord/stores/lazada.dart';
 import 'package:siftlord/stores/shopee.dart';
 import 'package:siftlord/stores/store_adapter.dart';
@@ -14,7 +15,7 @@ void main() {
 
     test('parses list items and skips ones without a price', () {
       final items = lazada.parse(fixture('lazada_search.json'));
-      expect(items, hasLength(2));
+      expect(items, hasLength(3));
 
       final a = items[0];
       expect(a.title, startsWith('Air Pro ANC'));
@@ -25,13 +26,21 @@ void main() {
       expect(a.rating, 5.0);
       expect(a.ratingCount, 3);
       expect(a.soldCount, 16);
-      expect(a.location, isNull);
+      expect(a.location, 'Pasay, Metro Manila');
       expect(a.isAd, isFalse);
+      expect(a.sellerTier, SellerTier.regular);
+      expect(a.brand, isNull, reason: '"No Brand" is no brand');
 
       final b = items[1];
       expect(b.isAd, isTrue);
       expect(b.isOfficial, isTrue);
+      expect(b.storePick, 'LazPick');
+      expect(b.brand, 'Apple');
       expect(b.soldCount, 2300);
+
+      final c = items[2];
+      expect(c.isOverseas, isTrue);
+      expect(c.storePick, 'Lazada Choice');
     });
 
     test('HTML slider page means verification needed', () {
@@ -70,9 +79,16 @@ void main() {
       expect(items[1].price, 99);
       expect(items[1].originalPrice, isNull);
 
-      expect(items[2].title, 'Old format item');
-      expect(items[2].price, 250);
-      expect(items[2].soldCount, 42);
+      final old = items[2];
+      expect(old.title, 'Old format item');
+      expect(old.price, 250);
+      expect(old.soldCount, 42);
+      expect(old.sellerTier, SellerTier.preferredPlus);
+      expect(old.isOverseas, isTrue, reason: 'cross-border even though it ships from Laguna');
+      expect(old.location, 'Calamba City, Laguna');
+      expect(old.fulfilledByStore, isTrue);
+      expect(old.storePick, 'Shopee Choice');
+      expect(old.shopName, 'Overseas Shop');
     });
 
     test('logged-out error payload means sign-in needed', () {
@@ -87,6 +103,53 @@ void main() {
       expect(shopee.classify(Uri.parse('https://shopee.ph/verify/captcha')), PageKind.verification);
       expect(shopee.classify(Uri.parse('https://shopee.ph/search?keyword=x')), PageKind.normal);
     });
+  });
+
+  group('Facebook Marketplace', () {
+    final fb = FacebookMarketplaceAdapter(citySlug: 'cebucity');
+
+    test('searches the chosen city', () {
+      expect(fb.searchUrl('airpods').toString(),
+          'https://www.facebook.com/marketplace/cebucity/search?query=airpods');
+    });
+
+    test('parses listings, skipping sold and free ones', () {
+      final items = fb.parse(fixture('facebook_search.json'));
+      expect(items.map((i) => i.title), ['Airpods pro gen 3', 'Apple AirPods Pro 3 Preloved', 'AirPods Pro 3 Brand New Sealed']);
+
+      final a = items[0];
+      expect(a.price, 4799);
+      expect(a.url.toString(), 'https://www.facebook.com/marketplace/item/1000000000000001/');
+      expect(a.location, 'Bacoor, Cavite');
+      expect(a.deliveryNote, 'Meetup only');
+      expect(a.secondhandMarket, isTrue);
+      expect(a.shopName, isNull, reason: 'sellers are private people');
+      expect(a.condition, isNull);
+
+      expect(items[1].originalPrice, 10500);
+      expect(items[1].condition, Condition.used);
+      expect(items[1].deliveryNote, 'Can ship');
+      expect(items[2].condition, Condition.brandNew);
+    });
+
+    test('a login page is a failure, not a sign-in prompt', () {
+      expect(fb.allowSignIn, isFalse);
+      expect(fb.classify(Uri.parse('https://www.facebook.com/login/?next=x')), PageKind.login);
+    });
+  });
+
+  test('conditionFromTitle', () {
+    expect(conditionFromTitle('iPhone 15 preloved'), Condition.used);
+    expect(conditionFromTitle('Lightly used, like new'), Condition.used);
+    expect(conditionFromTitle('BNEW sealed'), Condition.brandNew);
+    expect(conditionFromTitle('AirPods Pro 3'), isNull);
+  });
+
+  test('prettyLocation', () {
+    expect(prettyLocation('Metro Manila~Pasay'), 'Pasay, Metro Manila');
+    expect(prettyLocation('Bulacan'), 'Bulacan');
+    expect(prettyLocation(''), isNull);
+    expect(prettyLocation(null), isNull);
   });
 
   test('parseSoldText', () {

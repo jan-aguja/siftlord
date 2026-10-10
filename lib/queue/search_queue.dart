@@ -39,6 +39,9 @@ class SearchQueue extends ChangeNotifier {
   final StoreRunner runner;
   final int maxConcurrentJobs;
 
+  /// Called whenever a store finishes for a job.
+  void Function(SearchJob job)? onStoreFinished;
+
   final List<SearchJob> _jobs = [];
   final List<(SearchJob, StoreAdapter)> _pending = [];
   final Set<int> _activeJobs = {};
@@ -49,10 +52,12 @@ class SearchQueue extends ChangeNotifier {
 
   StoreAdapter store(String id) => stores.firstWhere((s) => s.id == id);
 
-  SearchJob add(String query) {
-    final job = SearchJob(_nextId++, query.trim(), stores);
+  /// Queues a search on [only] (default: every store).
+  SearchJob add(String query, {List<StoreAdapter>? only}) {
+    final targets = only ?? stores;
+    final job = SearchJob(_nextId++, query.trim(), targets);
     _jobs.add(job);
-    for (final s in stores) {
+    for (final s in targets) {
       _pending.add((job, s));
     }
     notifyListeners();
@@ -112,6 +117,7 @@ class SearchQueue extends ChangeNotifier {
       ..detail = r.detail;
     if (r.detail != null) debugPrint('[${store.id}] "${job.query}": ${r.status} ${r.detail}');
     if (!job.isRunning || !_jobs.contains(job)) _activeJobs.remove(job.id);
+    onStoreFinished?.call(job);
     notifyListeners();
     _pump();
   }

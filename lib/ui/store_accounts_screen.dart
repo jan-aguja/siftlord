@@ -22,7 +22,7 @@ class StoreAccountsScreen extends StatelessWidget {
               'signed in. You sign in on the store\'s own page, and Sift Lord never sees your password.',
             ),
           ),
-          for (final store in queue.stores)
+          for (final store in queue.stores.where((s) => s.allowSignIn))
             ListTile(
               leading: CircleAvatar(
                 backgroundColor: storeColor(store.id),
@@ -33,7 +33,7 @@ class StoreAccountsScreen extends StatelessWidget {
               trailing: const Icon(Icons.open_in_new),
               onTap: () async {
                 await Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => StoreWebScreen(title: store.name, url: store.loginUrl),
+                  builder: (_) => StoreWebScreen(title: store.name, url: store.loginUrl, hint: store.signInHint),
                 ));
                 queue.retryBlocked(store.id);
               },

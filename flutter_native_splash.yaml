@@ -1,0 +1,17 @@
+# Black launch screen with the icon tile (assets/icon/splash_logo.png, made by
+# tool/make_icons.py), so launch flows into the dark theme without a white
+# flash. Android 12+ only allows a centered icon on a flat color.
+flutter_native_splash:
+  color: "#000000"
+  image: assets/icon/splash_logo.png
+  color_dark: "#000000"
+  image_dark: assets/icon/splash_logo.png
+
+  android_12:
+    color: "#000000"
+    image: assets/icon/siftlord_icon_foreground.png
+    color_dark: "#000000"
+    image_dark: assets/icon/siftlord_icon_foreground.png
+
+  android: true
+  ios: true

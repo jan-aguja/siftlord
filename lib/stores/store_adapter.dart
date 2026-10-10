@@ -31,6 +31,16 @@ abstract class StoreAdapter {
   Uri get homeUrl;
   Uri get loginUrl;
 
+  /// Shown above the store's sign-in page, for quirks of signing in inside an app.
+  String? get signInHint => null;
+
+  /// False for stores searched only logged out: a login page counts as a
+  /// failure, never as a prompt to sign in.
+  bool get allowSignIn => true;
+
+  /// Load the store's desktop site instead of its mobile one.
+  bool get desktopMode => false;
+
   String? get documentStartScript => null;
   String? get loadStopScript => null;
 

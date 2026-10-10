@@ -29,6 +29,13 @@ class ShopeeAdapter extends StoreAdapter {
   @override
   Uri get loginUrl => Uri.https('shopee.ph', '/buyer/login');
 
+  // Google blocks its sign-in inside embedded WebViews, so Shopee hides the
+  // Google/Facebook buttons here. An SMS code reaches the same account.
+  @override
+  String get signInHint =>
+      'Signed up with Google? Google sign-in doesn\'t work inside apps. '
+      'Tap "Log In with Phone Number" and use the code Shopee texts you. It\'s the same account.';
+
   @override
   String get documentStartScript => '''
 $jsSendHelper
@@ -130,9 +137,14 @@ $jsSendHelper
     final rating = data['item_rating'] as Map<String, dynamic>?;
     final counts = rating?['rating_count'];
     final sold = data['item_card_display_sold_count'] as Map<String, dynamic>?;
-    final soldText = _blankToNull(sold?['historical_sold_count_text']) ??
-        _blankToNull((asset['sold_count'] as Map<String, dynamic>?)?['text']);
+    final soldText = blankToNull(sold?['historical_sold_count_text']) ??
+        blankToNull((asset['sold_count'] as Map<String, dynamic>?)?['text']);
     final flag = (asset['seller_flag'] as Map<String, dynamic>?)?['name'];
+    final titleFlags = {
+      for (final f in (asset['in_title_image_flags'] as List? ?? const []))
+        if (f is Map) '${f['name']}',
+    };
+    final location = blankToNull(asset['shop_location']);
 
     return Item(
       storeId: id,
@@ -147,10 +159,17 @@ $jsSendHelper
       ratingCount: counts is List && counts.isNotEmpty ? counts.first as int? : null,
       soldCount: sold?['historical_sold_count'] as int? ?? parseSoldText(soldText),
       soldText: soldText,
-      location: asset['shop_location'] as String?,
+      location: location,
       shopName: (data['shop_data'] as Map<String, dynamic>?)?['shop_name'] as String?,
+      brand: blankToNull((data['global_brand'] as Map<String, dynamic>?)?['display_name']),
       isAd: _isAd(e),
-      isOfficial: flag == 'OFFICIAL_SHOP',
+      sellerTier: flag == 'OFFICIAL_SHOP' || titleFlags.contains('OFFICIAL_SHOP')
+          ? SellerTier.mall
+          : data['shopee_verified'] == true
+              ? SellerTier.preferred
+              : SellerTier.regular,
+      isOverseas: isForeignLocation(location),
+      fulfilledByStore: titleFlags.contains('FBS_LOGO'),
     );
   }
 
@@ -165,6 +184,7 @@ $jsSendHelper
     final rating = b['item_rating'] as Map<String, dynamic>?;
     final counts = rating?['rating_count'];
     final sold = b['historical_sold'] as int? ?? b['sold'] as int?;
+    final location = blankToNull(b['shop_location']);
     return Item(
       storeId: id,
       rank: rank,
@@ -177,9 +197,21 @@ $jsSendHelper
       ratingCount: counts is List && counts.isNotEmpty ? counts.first as int? : null,
       soldCount: sold,
       soldText: sold == null ? null : '$sold sold',
-      location: b['shop_location'] as String?,
+      location: location,
+      shopName: blankToNull(b['shop_name']),
+      brand: blankToNull(b['brand']),
       isAd: _isAd(e) || e['adsid'] != null,
-      isOfficial: b['is_official_shop'] == true,
+      sellerTier: b['is_official_shop'] == true
+          ? SellerTier.mall
+          : b['is_preferred_plus_seller'] == true
+              ? SellerTier.preferredPlus
+              : b['shopee_verified'] == true
+                  ? SellerTier.preferred
+                  : SellerTier.regular,
+      // cb_option 1 = cross-border seller, even when stocked in a local warehouse.
+      isOverseas: b['cb_option'] == 1 || isForeignLocation(location),
+      fulfilledByStore: b['is_service_by_shopee'] == true,
+      storePick: b['is_shopee_choice'] == true ? 'Shopee Choice' : null,
     );
   }
 
@@ -211,9 +243,4 @@ $jsSendHelper
     if (hash.startsWith('http')) return hash;
     return 'https://down-ph.img.susercontent.com/file/${hash}_tn';
   }
-}
-
-String? _blankToNull(Object? v) {
-  final s = v?.toString().trim();
-  return s == null || s.isEmpty ? null : s;
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../money/money.dart';
 import '../pricing/catalog.dart';
+import '../pricing/price_check.dart';
 import '../pricing/pricing.dart';
 import '../queue/search_queue.dart';
 import '../stores/store_settings.dart';
@@ -329,7 +331,10 @@ class _QueueRow extends StatelessWidget {
       JobHealth.busy => (sift.statusBusy, 'Still searching'),
       JobHealth.attention => (sift.statusAttention, 'A store needs you'),
     };
-    final lowest = pricing.check.lowestFair(job.query, job.items);
+    final money = MoneyScope.of(context);
+    final lowest = pricing.check.lowestFair(job.query, job.items,
+        toMarket: (amount, cur) => money.rates.convert(amount, cur, PriceCheck.marketCurrency));
+    final lowestHome = lowest == null ? null : money.toHome(lowest.price, lowest.currency);
     final muted = theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final facts = [
       if (job.pins.isNotEmpty) '${job.pins.length} pinned',
@@ -385,10 +390,16 @@ class _QueueRow extends StatelessWidget {
                                     TextSpan(children: [
                                       TextSpan(text: 'From ', style: muted),
                                       TextSpan(
-                                        text: formatPeso(lowest.price),
+                                        text: lowestHome == null
+                                            ? formatMoney(lowest.price, lowest.currency)
+                                            : formatMoney(lowestHome, money.home,
+                                                whole: lowest.currency != money.home),
                                         style: theme.textTheme.titleSmall?.copyWith(
                                             fontWeight: FontWeight.w700, color: theme.colorScheme.primary),
                                       ),
+                                      if (lowest.currency != money.home && lowestHome != null)
+                                        TextSpan(
+                                            text: ' (${formatMoney(lowest.price, lowest.currency)})', style: muted),
                                       TextSpan(text: ' on ${queue.store(lowest.storeId).name}', style: muted),
                                     ]),
                                   ),

@@ -58,6 +58,16 @@ class PriceCheck {
 
   final Catalog catalog;
 
+  /// The currency catalog prices and references are in: the market the
+  /// catalog covers (PH for now). Listings in other currencies are never
+  /// judged against it; per-market prices are in docs/globalization-plan.md.
+  static const marketCurrency = 'PHP';
+  static const marketCountry = 'PH';
+
+  /// Listings judged against the catalog: sold in its market, in its
+  /// currency. A PHP price on Amazon US is still a US listing.
+  static bool inMarket(Item i) => i.country == marketCountry && i.currency == marketCurrency;
+
   /// Below this share of the usual low price, a listing is flagged.
   static const lowFactor = 0.6;
 
@@ -102,7 +112,8 @@ class PriceCheck {
     );
     final prices = [
       for (final i in items)
-        if (i.isOfficial && !i.isAd && probe.claimedBy(i, strict: true)) i.price,
+        if (inMarket(i) && i.isOfficial && !i.isAd && probe.claimedBy(i, strict: true))
+          i.price,
     ];
     final median = robustMedian(prices);
     if (median == null) return null;
@@ -120,7 +131,12 @@ class PriceCheck {
   /// what was searched (not an accessory for it), skipping ads, used and
   /// sold-out items, "Third-party item"s, and anything well under the usual
   /// price ("Price looks off" or "Big sale" alike).
-  Item? lowestFair(String query, List<Item> items, [PriceReference? ref]) {
+  ///
+  /// [toMarket] converts other currencies to [marketCurrency] (null when
+  /// there's no rate: that listing is skipped), so a ¥ listing can be the
+  /// "From" price when it's the cheapest at today's rate.
+  Item? lowestFair(String query, List<Item> items,
+      {PriceReference? ref, double? Function(double amount, String currency)? toMarket}) {
     ref ??= reference(query, items);
     final tokens = queryTokens(query);
     final probe = ref ??
@@ -135,20 +151,26 @@ class PriceCheck {
               ));
     if (probe == null) return null;
     Item? best;
+    double? bestPrice;
     for (final i in items) {
       if (i.isAd || i.soldOut || i.condition == Condition.used || !probe.claimedBy(i)) continue;
+      final price = i.currency == marketCurrency ? i.price : toMarket?.call(i.price, i.currency);
+      if (price == null) continue;
       // Well under usual is never a "From" price, even an official "Big sale":
       // those are often a cheaper sibling ("Switch OLED / Switch 2 Console").
-      if (ref != null && i.price < ref.low * lowFactor) continue;
+      if (ref != null && price < ref.low * lowFactor) continue;
       if (verdict(i, ref, query) == PriceVerdict.thirdParty) continue;
-      if (best == null || i.price < best.price) best = i;
+      if (bestPrice == null || price < bestPrice) {
+        best = i;
+        bestPrice = price;
+      }
     }
     return best;
   }
 
   PriceVerdict verdict(Item item, PriceReference? ref, String query) {
     if (isThirdParty(item, ref, query)) return PriceVerdict.thirdParty;
-    if (ref == null || !ref.claimedBy(item)) return PriceVerdict.none;
+    if (ref == null || !inMarket(item) || !ref.claimedBy(item)) return PriceVerdict.none;
     final low = item.secondhandMarket && item.condition != Condition.brandNew
         ? secondhandLowFactor
         : lowFactor;

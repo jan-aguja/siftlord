@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/item.dart';
+import '../money/money.dart';
 import '../pricing/price_check.dart';
 import '../pricing/pricing.dart';
 import '../queue/search_queue.dart';
@@ -13,8 +14,15 @@ import 'theme.dart';
 enum SortMode { bestMatch, priceLow, priceHigh, mostSold }
 
 /// Store-agnostic ordering: best match interleaves the stores' own rankings.
+///
+/// [priceOf] puts prices in one currency for sorting (default: as listed);
+/// listings it can't convert sort last.
 List<Item> arrange(List<Item> items,
-    {required SortMode sort, required bool hideAds, Set<String> hiddenStores = const {}}) {
+    {required SortMode sort,
+    required bool hideAds,
+    Set<String> hiddenStores = const {},
+    double? Function(Item)? priceOf}) {
+  final price = priceOf ?? (Item i) => i.price;
   final list = [
     for (final i in items)
       if ((!hideAds || !i.isAd) && !hiddenStores.contains(i.storeId)) i,
@@ -28,9 +36,9 @@ List<Item> arrange(List<Item> items,
     case SortMode.bestMatch:
       list.sort(byRank);
     case SortMode.priceLow:
-      list.sort((a, b) => a.price.compareTo(b.price));
+      list.sort((a, b) => (price(a) ?? double.infinity).compareTo(price(b) ?? double.infinity));
     case SortMode.priceHigh:
-      list.sort((a, b) => b.price.compareTo(a.price));
+      list.sort((a, b) => (price(b) ?? -1).compareTo(price(a) ?? -1));
     case SortMode.mostSold:
       list.sort((a, b) => (b.soldCount ?? -1).compareTo(a.soldCount ?? -1));
   }
@@ -114,7 +122,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
             for (final p in pins)
               if (!_hiddenStores.contains(p.item.storeId)) p.item,
             ...arrange([for (final i in all) if (!pinnedKeys.contains(i.key)) i],
-                sort: _sort, hideAds: _hideAds, hiddenStores: _hiddenStores),
+                sort: _sort,
+                hideAds: _hideAds,
+                hiddenStores: _hiddenStores,
+                priceOf: (i) => MoneyScope.of(context).toHome(i.price, i.currency)),
           ];
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -258,7 +269,7 @@ class _ReferenceBar extends StatelessWidget {
       detail = 'Sift Lord price list, checked ${_months[entry.checked.month - 1]} ${entry.checked.year}';
     } else {
       label = 'OFFICIAL STORES';
-      title = 'About ${formatPeso(ref.low)}';
+      title = 'About ${formatMarket(ref.low)}';
       detail = 'Middle price of ${ref.officialCount} official-store listings here';
     }
     final sift = SiftColors.of(context);

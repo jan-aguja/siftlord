@@ -33,12 +33,23 @@ class Item {
     this.voucherLabel,
     this.soldOut = false,
     this.voucherCode,
+    this.currency = 'PHP',
+    this.country = 'PH',
   });
 
   final String storeId;
   final String title;
 
-  /// Price in pesos as the store shows it on the result card: after the
+  /// The currency of every amount on this item (ISO 4217). Usually its
+  /// storefront's, but a store may show another (Amazon converts to pesos for
+  /// visitors from the Philippines).
+  final String currency;
+
+  /// The storefront's country (ISO 3166): where it ships from and which
+  /// market's usual prices apply. Not implied by [currency].
+  final String country;
+
+  /// Price in [currency] as the store shows it on the result card: after the
   /// vouchers the store applies there (see [priceBeforeVouchers]).
   final double price;
 
@@ -123,6 +134,8 @@ class Item {
         if (voucherLabel != null) 'voucher': voucherLabel,
         if (soldOut) 'soldOut': true,
         if (voucherCode != null) 'voucherCode': voucherCode,
+        if (currency != 'PHP') 'cur': currency,
+        if (country != 'PH') 'country': country,
       };
 
   factory Item.fromJson(Map<String, dynamic> j) {
@@ -154,6 +167,9 @@ class Item {
       voucherLabel: j['voucher'] as String?,
       soldOut: j['soldOut'] == true,
       voucherCode: j['voucherCode'] as String?,
+      // Saved before currencies existed: every store was a PH one.
+      currency: j['cur'] as String? ?? 'PHP',
+      country: j['country'] as String? ?? 'PH',
     );
   }
 

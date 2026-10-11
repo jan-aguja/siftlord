@@ -1,0 +1,81 @@
+{
+  "host": "www.amazon.co.uk",
+  "deliverTo": "Philippines",
+  "results": [
+    {
+      "asin": "B0C2TWMNT1",
+      "title": "INIU 240W USB C to USB C Charger Cable, [2-Pack 2m] PD Type C Charge Cable",
+      "brand": null,
+      "price": "PHP 780.01",
+      "listPrice": "PHP 995.99",
+      "image": "https://m.media-amazon.com/images/I/814lZbU+YYL._AC_UY218_.jpg",
+      "rating": "4.6 out of 5 stars",
+      "ratingCount": "10,127 ratings",
+      "bought": "5K+ bought in past month",
+      "sponsored": true,
+      "prime": false,
+      "badge": null,
+      "delivery": "PHP 1,858.23 delivery Thu 15 Oct Delivers to Philippines"
+    },
+    {
+      "asin": "B0CB1BVHTK",
+      "title": "INIU Power Bank, 100W 25000mAh Portable Charger Fast Charging USB C Input & Output for Laptop and Phones Battery Pack, Powerbank for iPhone 15 14 13 12 Pro Max Mini Plus Samsung Steam Deck iPad etc",
+      "brand": null,
+      "price": null,
+      "listPrice": null,
+      "image": "https://m.media-amazon.com/images/I/61OE2r-Z20L._AC_UY218_.jpg",
+      "rating": "4.2 out of 5 stars",
+      "ratingCount": "5,565 ratings",
+      "bought": "300+ bought in past month",
+      "sponsored": true,
+      "prime": false,
+      "badge": null,
+      "delivery": ""
+    },
+    {
+      "asin": "B0F66KKMNZ",
+      "title": "Belkin Compact Wall Charger 45W, USB-C Power Delivery Fast Charging for Apple iPhone 17, iPhone Air, iPhone 16 Serie, Samsung Galaxy S25, Google Pixel, iPad, AirPods & More - White",
+      "brand": null,
+      "price": "PHP 1,079.05",
+      "listPrice": "PHP 1,660.53",
+      "image": "https://m.media-amazon.com/images/I/51OR3n20VIL._AC_UY218_.jpg",
+      "rating": "4.6 out of 5 stars",
+      "ratingCount": "137 ratings",
+      "bought": "1K+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": "amazons-choice",
+      "delivery": "PHP 1,844.94 delivery Mon 19 Oct Delivers to Philippines"
+    },
+    {
+      "asin": "B0G6XNZ7CN",
+      "title": "BSTOEM USB C Plug Fast Charge, 65W 6-Port UK Multi USB Wall Plug 25W(MAX)",
+      "brand": null,
+      "price": "PHP 1,487.75",
+      "listPrice": null,
+      "image": "https://m.media-amazon.com/images/I/61qaFs74DgL._AC_UY218_.jpg",
+      "rating": "4.2 out of 5 stars",
+      "ratingCount": "9,992 ratings",
+      "bought": "3K+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": null,
+      "delivery": "PHP 1,868.20 delivery Thu 15 Oct Delivers to Philippines"
+    },
+    {
+      "asin": "B08CDDSVN4",
+      "title": "UGREEN USB C Charger 65W Plug GaN 2C Fast Charging Laptop Charger",
+      "brand": null,
+      "price": "PHP 2,400.67",
+      "listPrice": "PHP 2,491.21",
+      "image": "https://m.media-amazon.com/images/I/41mC9W94aPL._AC_UY218_.jpg",
+      "rating": "4.5 out of 5 stars",
+      "ratingCount": "3,731 ratings",
+      "bought": "500+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": null,
+      "delivery": "PHP 1,868.20 delivery Thu 15 Oct Delivers to Philippines"
+    }
+  ]
+}

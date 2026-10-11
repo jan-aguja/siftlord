@@ -1,7 +1,7 @@
 # Sift Lord (repo: siftlord)
 
-Flutter app (Android + iOS) that searches Lazada PH, Shopee PH, Zalora PH, Datablitz and (optionally)
-Facebook Marketplace at once and shows the results as
+Flutter app (Android + iOS) that searches Lazada PH, Shopee PH, Zalora PH, Datablitz, Amazon US/JP/UK
+and (optionally) Facebook Marketplace at once and shows the results as
 calm, ad-free cards; tapping one opens the product in the store's own app. Bundle/app ID:
 `com.jandroid.siftlord`. Stage: proof of concept for Jan and his wife. No monetization work yet.
 
@@ -9,7 +9,7 @@ Not a Philippine-only app: the PH stores are where it starts (Lazada/Shopee are 
 because they're so closed), but it's meant to go global. Planned: international stores (e.g. Amazon)
 and a default app currency, with foreign prices converted at the prevailing rate. Don't bake
 "PH only" or peso-only assumptions into new code or copy; `formatPeso` and peso catalog prices
-are today's state, not the design.
+are today's state, not the design. The plan is in `docs/globalization-plan.md`.
 
 ## The model (decided — don't re-propose alternatives)
 
@@ -60,6 +60,19 @@ are today's state, not the design.
   Matching is loose and titles lead with the platform ("Nintendo Switch 2 Yakuza Kiwami"), which
   is why official listings far under the usual price get no tag (see Price check).
 
+- **Amazon US / JP / UK** (`amazon.dart`, one adapter per `AmazonStorefront`, off by default) —
+  works logged out; desktop UA (more results, more priced). No embedded JSON: the load-stop
+  script reads `div[data-component-type="s-search-result"][data-asin]` cards (`data-cy` blocks)
+  and sends raw text; Dart parses prices ("$1,299.99", "￥4,980", "PHP 2,508.97"), ratings and
+  "bought in past month" in English and Japanese. Amazon picks the display currency itself
+  (`i18n-prefs`): logged out from PH it often shows pesos, so `Item.currency` comes from each
+  price and `Item.country` from the storefront. Default delivery is "Philippines" (IP guess);
+  items that can't ship there have no price and are dropped. Brand is printed above the title,
+  so it's put in front of titles lacking it. Ads: `AdHolder` / sponsored label. CAPTCHA
+  (`validateCaptcha`, `#captchacharacters`) → verification, never solved for the user; UK may
+  serve an Akamai JS check (`/_sec/verify`) that passes by itself in a real WebView. Saw no
+  CAPTCHA in light testing; heavy use may differ.
+
 Seller data: Shopee (mobile UA serves the `item_basic` format) has `is_official_shop` (Mall),
 `is_preferred_plus_seller`, `shopee_verified` (shown as Preferred — inferred, not confirmed),
 `is_service_by_shopee`, `is_shopee_choice`, and `cb_option == 1` for cross-border sellers, who
@@ -95,6 +108,14 @@ official stores stop selling them, tier 2 has nothing to go on.
   Price alerts use 0.35× instead of 0.6× here unless the title says brand new.
 
 Store on/off and the Marketplace city live in `StoreSettings` (side menu). Marketplace defaults off.
+
+Money (`lib/money/`): every item has `currency` (ISO 4217, from the price) and `country` (its
+storefront's). `formatMoney` formats any currency (never Orbitron). `Rates` fetches ECB reference
+rates from `api.frankfurter.dev/v1/latest` at most daily, cached for offline; `MoneyScope` holds
+the user's currency (`StoreSettings.homeCurrency`, default PHP, "Show prices in" in the menu).
+Listings in another currency show "≈ ₱…"; listings from abroad also say "plus shipping and
+import fees". The price check only judges listings in its market (`PriceCheck.inMarket`: PH and
+PHP); "From" and price sorting compare converted amounts.
 
 Queue rows show a picture, the query, "From ₱…", per-store counts and a status strip
 (`SearchJob.health`: green all fetched, amber searching, red a store needs the user). "From" is

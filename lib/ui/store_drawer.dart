@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../money/money.dart';
 import '../stores/facebook.dart';
 import '../stores/store_settings.dart';
 import 'store_style.dart';
@@ -28,6 +29,9 @@ class _StoreDrawerState extends State<StoreDrawer> {
     'shopee': 'May ask you to sign in',
     'zalora': 'Fashion. Works without signing in',
     'datablitz': 'Games and gadgets. Works without signing in',
+    'amazon-us': 'amazon.com · ships abroad, plus shipping and import fees',
+    'amazon-jp': 'amazon.co.jp · ships abroad, plus shipping and import fees',
+    'amazon-uk': 'amazon.co.uk · ships abroad, plus shipping and import fees',
     'facebook': 'People selling near you, often used. Searched without signing in.',
   };
 
@@ -112,6 +116,29 @@ class _StoreDrawerState extends State<StoreDrawer> {
                       DropdownMenuItem(value: d, child: Text('After $d days')),
                   ],
                   onChanged: (d) => settings.autoCleanupDays = d,
+                ),
+              ),
+              const Divider(height: 32),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 2),
+                child: Text('PRICES', style: sectionLabel(context)),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: Text('Listings from stores abroad are converted at the day\'s rate.',
+                    style: theme.textTheme.bodySmall),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: DropdownButtonFormField<String>(
+                  initialValue: settings.homeCurrency,
+                  isExpanded: true,
+                  decoration: const InputDecoration(labelText: 'Show prices in', isDense: true),
+                  items: [
+                    for (final c in {settings.homeCurrency, ...MoneyScope.of(context).rates.currencies})
+                      DropdownMenuItem(value: c, child: Text('$c  ${currencySymbol(c).trim()}')),
+                  ],
+                  onChanged: (c) => settings.homeCurrency = c!,
                 ),
               ),
               const Divider(height: 32),

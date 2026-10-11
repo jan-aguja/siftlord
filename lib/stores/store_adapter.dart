@@ -25,6 +25,15 @@ abstract class StoreAdapter {
   String get id;
   String get name;
 
+  /// Where the storefront sells (ISO 3166, e.g. "PH", "US", "JP", "GB"). One
+  /// store in one country: the site decides the currency, not the user's
+  /// location (Lazada PH shows pesos even from the US).
+  String get country => 'PH';
+
+  /// The currency its prices are normally in (ISO 4217). Parsers set
+  /// `Item.currency` and `Item.country` on every item (defaults PHP / PH).
+  String get currency => 'PHP';
+
   Uri searchUrl(String query);
 
   /// Page a user opens to sign in or clear a check, in a visible WebView.

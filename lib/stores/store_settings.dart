@@ -76,6 +76,17 @@ class StoreSettings extends ChangeNotifier {
     notifyListeners();
   }
 
+  static const _currencyKey = 'home_currency';
+
+  /// The currency prices are shown in; foreign listings are converted to it.
+  /// Pesos until the user picks otherwise (country onboarding comes later).
+  String get homeCurrency => _prefs.getString(_currencyKey) ?? 'PHP';
+
+  set homeCurrency(String c) {
+    _prefs.setString(_currencyKey, c);
+    notifyListeners();
+  }
+
   static const _sideKey = 'app_side';
 
   /// Dark Side unless the user picks otherwise.

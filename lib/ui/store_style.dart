@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../money/money.dart';
+import '../pricing/price_check.dart';
 import '../stores/store_runner.dart';
 
 Color storeColor(String storeId) => switch (storeId) {
@@ -8,17 +10,14 @@ Color storeColor(String storeId) => switch (storeId) {
       'facebook' => const Color(0xFF1877F2),
       // Zalora's black, lifted a little so it shows on the Dark Side.
       'zalora' => const Color(0xFF3D3D3D),
+      'amazon-us' || 'amazon-jp' || 'amazon-uk' => const Color(0xFFFF9900),
       'datablitz' => const Color(0xFF0017DB),
       _ => Colors.grey,
     };
 
-String formatPeso(double v) {
-  final whole = v.truncate();
-  final cents = ((v - whole) * 100).round();
-  final digits = whole.toString().replaceAllMapped(
-      RegExp(r'\B(?=(\d{3})+(?!\d))'), (_) => ',');
-  return cents == 0 ? '₱$digits' : '₱$digits.${cents.toString().padLeft(2, '0')}';
-}
+/// A usual-price amount: the catalog and price references are in the
+/// market's currency ([PriceCheck.marketCurrency]).
+String formatMarket(double v) => formatMoney(v, PriceCheck.marketCurrency);
 
 String statusLabel(StoreStatus s, int count) => switch (s) {
       StoreStatus.queued => 'queued',
@@ -59,7 +58,7 @@ String timeAgo(DateTime t, {DateTime? now}) {
 }
 
 String formatPriceRange(double low, double high) =>
-    low == high ? formatPeso(low) : '${formatPeso(low)}–${formatPeso(high)}';
+    low == high ? formatMarket(low) : '${formatMarket(low)}–${formatMarket(high)}';
 
 /// A small product picture, or a placeholder until one has been learned.
 class ProductThumb extends StatelessWidget {

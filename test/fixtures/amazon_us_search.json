@@ -1,0 +1,81 @@
+{
+  "host": "www.amazon.com",
+  "deliverTo": "Philippines",
+  "results": [
+    {
+      "asin": "B0FRB8FXK5",
+      "title": "Apple AirPods Pro (3nd Generation) (Renewed)",
+      "brand": "Amazon Renewed",
+      "price": null,
+      "listPrice": null,
+      "image": "https://m.media-amazon.com/images/I/61solmQSSlL._AC_UY218_.jpg",
+      "rating": "4.1 out of 5 stars",
+      "ratingCount": "287 ratings",
+      "bought": "2K+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": null,
+      "delivery": null
+    },
+    {
+      "asin": "B0HHXKMCYY",
+      "title": "Wireless Ear Buds (2nd Generation), Bluetooth Headphones with Charging Case Included, Over 30 Hours of Battery Life, Effortless Setup for iOS/Android",
+      "brand": null,
+      "price": "$39.99",
+      "listPrice": null,
+      "image": "https://m.media-amazon.com/images/I/51boaCR4VLL._AC_UY218_.jpg",
+      "rating": "5.0 out of 5 stars",
+      "ratingCount": "2 ratings",
+      "bought": "50+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": null,
+      "delivery": "FREE delivery Fri, Oct 30 to Philippines on $49 of eligible items Or fastest delivery Wed, Oct 21"
+    },
+    {
+      "asin": "B0DGHWD7CT",
+      "title": "Airpods (4Th Generation) Airpods 4 Headset Wireless, W129187548 (Airpods 4 Headset Wireless in-Ear Calls/Music/Sport/Everyday Bluetooth White)",
+      "brand": "Apple",
+      "price": "$125.61",
+      "listPrice": null,
+      "image": "https://m.media-amazon.com/images/I/61DvMw16ITL._AC_UY218_.jpg",
+      "rating": "4.6 out of 5 stars",
+      "ratingCount": "15,262 ratings",
+      "bought": "100+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": "amazons-choice",
+      "delivery": ""
+    },
+    {
+      "asin": "B0G1PJLWLZ",
+      "title": "Galaxy Buds 4 Pro (2026) AI True Wireless Bluetooth Earbuds, Black",
+      "brand": "Samsung",
+      "price": "$189.99",
+      "listPrice": "$249.99",
+      "image": "https://m.media-amazon.com/images/I/51QEHqsjzPL._AC_UY218_.jpg",
+      "rating": "4.4 out of 5 stars",
+      "ratingCount": "2,534 ratings",
+      "bought": "10K+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": null,
+      "delivery": "FREE delivery Fri, Oct 30 to Philippines Or fastest delivery Wed, Oct 21"
+    },
+    {
+      "asin": "B0FNWFXG2W",
+      "title": "P31i by Anker Translation Earbuds with Real-Time Adaptive ANC",
+      "brand": "Soundcore",
+      "price": "$32.99",
+      "listPrice": "$59.99",
+      "image": "https://m.media-amazon.com/images/I/61fZoNoybhL._AC_UY218_.jpg",
+      "rating": "4.4 out of 5 stars",
+      "ratingCount": "9,644 ratings",
+      "bought": "5K+ bought in past month",
+      "sponsored": false,
+      "prime": false,
+      "badge": null,
+      "delivery": "FREE delivery Fri, Oct 30 to Philippines on $49 of eligible items Or fastest delivery Wed, Oct 21"
+    }
+  ]
+}

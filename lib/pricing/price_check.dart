@@ -65,6 +65,11 @@ class PriceCheck {
   /// under retail is normal; unless the title says it's brand new.
   static const secondhandLowFactor = 0.35;
 
+  /// An official listing below this share isn't a sale of the product but a
+  /// different item that names it (Datablitz titles games "Nintendo Switch 2
+  /// Yakuza Kiwami"): no tag, and it's never a "From" price.
+  static const implausibleSaleFactor = 0.35;
+
   /// Above this multiple of the usual high price, a listing is flagged.
   static const highFactor = 1.5;
 
@@ -111,6 +116,36 @@ class PriceCheck {
     );
   }
 
+  /// The "From ₱…" price for a search: the cheapest listing that claims to be
+  /// what was searched (not an accessory for it), skipping ads, used and
+  /// sold-out items, "Third-party item"s, and anything well under the usual
+  /// price ("Price looks off" or "Big sale" alike).
+  Item? lowestFair(String query, List<Item> items, [PriceReference? ref]) {
+    ref ??= reference(query, items);
+    final tokens = queryTokens(query);
+    final probe = ref ??
+        (tokens.isEmpty
+            ? null
+            : PriceReference(
+                low: 0,
+                high: 0,
+                source: PriceSource.officialStores,
+                queryWords: words(query),
+                productTokens: [tokens],
+              ));
+    if (probe == null) return null;
+    Item? best;
+    for (final i in items) {
+      if (i.isAd || i.soldOut || i.condition == Condition.used || !probe.claimedBy(i)) continue;
+      // Well under usual is never a "From" price, even an official "Big sale":
+      // those are often a cheaper sibling ("Switch OLED / Switch 2 Console").
+      if (ref != null && i.price < ref.low * lowFactor) continue;
+      if (verdict(i, ref, query) == PriceVerdict.thirdParty) continue;
+      if (best == null || i.price < best.price) best = i;
+    }
+    return best;
+  }
+
   PriceVerdict verdict(Item item, PriceReference? ref, String query) {
     if (isThirdParty(item, ref, query)) return PriceVerdict.thirdParty;
     if (ref == null || !ref.claimedBy(item)) return PriceVerdict.none;
@@ -118,7 +153,8 @@ class PriceCheck {
         ? secondhandLowFactor
         : lowFactor;
     if (item.price < ref.low * low) {
-      return item.isOfficial ? PriceVerdict.bigSale : PriceVerdict.tooLow;
+      if (!item.isOfficial) return PriceVerdict.tooLow;
+      return item.price < ref.low * implausibleSaleFactor ? PriceVerdict.none : PriceVerdict.bigSale;
     }
     if (item.price > ref.high * highFactor) return PriceVerdict.tooHigh;
     return PriceVerdict.none;

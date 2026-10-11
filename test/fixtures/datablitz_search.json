@@ -1,0 +1,169 @@
+{
+  "total_product": 2794,
+  "total_page": 117,
+  "products": [
+    {
+      "id": 15111206175091,
+      "title": "Nintendo Switch 2 Console",
+      "handle": "nintendo-switch-2-console-sea-bee-s-kb5aa-phl",
+      "vendor": "Nintendo",
+      "product_type": "Console System",
+      "available": true,
+      "price_min": 31995,
+      "price_max": 31995,
+      "price_min_php": 27990,
+      "compare_at_price_min": null,
+      "images_info": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0355/8296/7943/files/XDGNDFHN.jpg?v=1750869097",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "variants": [
+        {
+          "id": 52683866833267,
+          "title": "Default Title",
+          "price": "31995.00",
+          "price_php": "27990.0",
+          "compare_at_price": null,
+          "available": true,
+          "sku": "4902370553154"
+        }
+      ]
+    },
+    {
+      "id": 15184813326707,
+      "title": "PS5 Ghost of Yotei (Asian)",
+      "handle": "ps5-ghost-of-yotei-asian",
+      "vendor": "Sony Interactive Entertainment",
+      "product_type": "PS5 Games",
+      "available": true,
+      "price_min": 3385,
+      "price_max": 3385,
+      "price_min_php": 3490,
+      "compare_at_price_min": 4003,
+      "images_info": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0355/8296/7943/files/yotei-main-image.jpg?v=1773537352",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "variants": [
+        {
+          "id": 62132381581683,
+          "title": "Default Title",
+          "price": "3385.00",
+          "price_php": "3490.0",
+          "compare_at_price": "4003.00",
+          "available": true,
+          "sku": "4948872616249"
+        }
+      ]
+    },
+    {
+      "id": 15186602066291,
+      "title": "PS5 Ghost of Yotei Collectors Edition (Asian)",
+      "handle": "ps5-ghost-of-yotei-collectors-edition-asian",
+      "vendor": "Sony Interactive Entertainment",
+      "product_type": "PS5 Games",
+      "available": false,
+      "price_min": 12920,
+      "price_max": 12920,
+      "price_min_php": 11490,
+      "compare_at_price_min": 13538,
+      "images_info": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0355/8296/7943/files/0_bf1572a7-7464-44b3-a9f8-4f044545c918.jpg?v=1758872782",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "variants": [
+        {
+          "id": 62138216939891,
+          "title": "Default Title",
+          "price": "12920.00",
+          "price_php": "11490.0",
+          "compare_at_price": "13538.00",
+          "available": false,
+          "sku": "4948872616294"
+        }
+      ]
+    },
+    {
+      "id": 9119123570847,
+      "title": "Steam Deck OLED (512GB, 1TB)",
+      "handle": "steam-deck-oled-1tb",
+      "vendor": "Valve Corporation",
+      "product_type": "Console System",
+      "available": true,
+      "price_min": 54995,
+      "price_max": 64995,
+      "price_min_php": 39950,
+      "compare_at_price_min": 42250,
+      "images_info": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0355/8296/7943/files/0_f14ed169-18a1-47ed-9c1b-ea4c7ba8cf7e.jpg?v=1756107971",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "variants": [
+        {
+          "id": 44734944673951,
+          "title": "512GB NVME SSD",
+          "price": "54995.00",
+          "price_php": "39950.0",
+          "compare_at_price": null,
+          "available": true,
+          "sku": "0814585022278"
+        },
+        {
+          "id": 44734944641183,
+          "title": "1TB NVME SSD",
+          "price": "64995.00",
+          "price_php": "40995.0",
+          "compare_at_price": "42250.00",
+          "available": false,
+          "sku": "0814585022322"
+        }
+      ]
+    },
+    {
+      "id": 15127632576883,
+      "title": "XBSX EA SPORTS FC 26 Pre-Order Downpayment",
+      "handle": "xbsx-ea-sports-fc-26-pre-order-downpayment",
+      "vendor": "Electronic Arts",
+      "product_type": "Pre-Order",
+      "available": true,
+      "price_min": 500,
+      "price_max": 500,
+      "price_min_php": 500,
+      "compare_at_price_min": null,
+      "images_info": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0355/8296/7943/files/0_a7506b45-d6f5-4c52-8aec-9df2748e617c.jpg?v=1753080851",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "variants": [
+        {
+          "id": 52735682052467,
+          "title": "Default Title",
+          "price": "500.00",
+          "price_php": "500.0",
+          "compare_at_price": null,
+          "available": true,
+          "sku": "1000000019071PRE"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "currency": "PHP",
+    "money_format": "₱{{ amount }}"
+  }
+}

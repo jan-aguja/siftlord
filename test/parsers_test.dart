@@ -60,7 +60,7 @@ void main() {
 
     test('parses current and old item formats', () {
       final items = shopee.parse(fixture('shopee_search.json'));
-      expect(items, hasLength(3));
+      expect(items, hasLength(5));
 
       final a = items[0];
       expect(a.title, 'AirPods Pro 3 (2025)');
@@ -89,6 +89,24 @@ void main() {
       expect(old.fulfilledByStore, isTrue);
       expect(old.storePick, 'Shopee Choice');
       expect(old.shopName, 'Overseas Shop');
+    });
+
+    test('uses the card price, which already has Shopee\'s recommended voucher off', () {
+      final items = shopee.parse(fixture('shopee_search.json'));
+      final flip = items[3];
+      expect(flip.price, 5999);
+      expect(flip.priceBeforeVouchers, 6199);
+      expect(flip.voucherSavings, 200);
+      expect(flip.voucherLabel, 'shop voucher');
+      expect(flip.originalPrice, 7999);
+
+      // The card's variant (₱673 − ₱5 voucher), not the cheapest-variant ₱499.
+      expect(items[4].price, 668);
+      expect(items[4].voucherSavings, 5);
+
+      // No vouchers: nothing to show.
+      expect(items[0].voucherSavings, isNull);
+      expect(items[2].voucherSavings, isNull);
     });
 
     test('logged-out error payload means sign-in needed', () {

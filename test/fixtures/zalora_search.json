@@ -1,0 +1,389 @@
+{
+ "list": {
+  "data": {
+   "NumProductFound": 5,
+   "Products": [
+    {
+     "ConfigSku": "A35AFSH6D2ECF4GS",
+     "Name": "Suede Classic",
+     "Price": "Php 5,500.00",
+     "SpecialPrice": "",
+     "Brand": "PUMA",
+     "ImageList": [
+      "https://dynamic.zacdn.com/lJzK1Mvp1XOEl3e3VST2vViawf4=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-1.jpg",
+      "https://dynamic.zacdn.com/1FkEqsBIdH3l94pyLXP-YSF3bs0=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-2.jpg",
+      "https://dynamic.zacdn.com/Fpds38CV4MXKQZ-ezy_tP_hYJVY=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-3.jpg",
+      "https://dynamic.zacdn.com/kch1j3SZtL9w9QDWj_TUcgOdSgg=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-4.jpg",
+      "https://dynamic.zacdn.com/626NCRHK5scSN83-cJID94yDN9E=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-5.jpg",
+      "https://dynamic.zacdn.com/4s6VU1aOj8NeoEK1TWQDMmOQvII=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-6.jpg",
+      "https://dynamic.zacdn.com/a4wYRMm_fmq6oiFtFCXXbFe1Q9k=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-7.jpg",
+      "https://dynamic.zacdn.com/sKGUEkaLkcJaRzxyCq6ZC45Wm9Y=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-8.jpg"
+     ],
+     "MainImageUrl": "https://dynamic.zacdn.com/lJzK1Mvp1XOEl3e3VST2vViawf4=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/puma-4170-9163543-1.jpg",
+     "Variations": [],
+     "Breadcrumbs": [
+      "Men",
+      "Sports",
+      "Footwear",
+      "Sneakers"
+     ],
+     "AdId": "",
+     "MarkdownLabel": "",
+     "SpecialLabel": "trending",
+     "HasDifferentSimplePrices": false,
+     "Overlays": [],
+     "OfficialstoreInformation": {
+      "Label": "",
+      "ImageUrlPdv": "",
+      "ImageUrlCatalog": ""
+     },
+     "Tracking": null,
+     "IsZnowSku": false,
+     "PriceInDecimal": 5500,
+     "SpecialPriceInDecimal": 0,
+     "SupplierName": "PUMA Official Store.",
+     "SupplierNameEn": "PUMA Official Store.",
+     "ReviewStatistics": {
+      "AvgRating": 4.8,
+      "ReviewCount": 20,
+      "StarPercentage": 4.75,
+      "MostMentionedTags": null
+     },
+     "ProductUrl": "p/puma-suede-classic-green-3453619",
+     "IsMembershipEligible": false,
+     "Age": 621,
+     "ReplenishedAt": "",
+     "DepartmentCode": "MP",
+     "IsExclusiveLaunch": false,
+     "IsBestPriceGuarantee": false,
+     "IsNonSaleItem": false
+    },
+    {
+     "ConfigSku": "3EC0ASH5D42A5EGS",
+     "Name": "530 Lifestyle Shoes",
+     "Price": "Php 6,795.00",
+     "SpecialPrice": "Php 6,342.00",
+     "Brand": "New Balance",
+     "ImageList": [
+      "https://dynamic.zacdn.com/2EnkkTrwl1tjGy9zTGpphhZYYBI=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/new-balance-1930-5516434-1.jpg",
+      "https://dynamic.zacdn.com/Av63SUQu2-vrY19FFK_gOfAbYr8=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/new-balance-1930-5516434-2.jpg",
+      "https://dynamic.zacdn.com/jc4x5EcsekDk08vTTuMmLDMyLfo=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/new-balance-1930-5516434-3.jpg",
+      "https://dynamic.zacdn.com/qxXLaSQCCp6bSn2sv3zaz6TLwKM=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/new-balance-1930-5516434-4.jpg"
+     ],
+     "MainImageUrl": "https://dynamic.zacdn.com/2EnkkTrwl1tjGy9zTGpphhZYYBI=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/new-balance-1930-5516434-1.jpg",
+     "Variations": [],
+     "Breadcrumbs": [
+      "Sports",
+      "Women's Sports",
+      "Footwear",
+      "Sneakers"
+     ],
+     "AdId": "",
+     "MarkdownLabel": "7% OFF",
+     "SpecialLabel": "best_seller",
+     "HasDifferentSimplePrices": true,
+     "Overlays": [],
+     "OfficialstoreInformation": {
+      "Label": "",
+      "ImageUrlPdv": "",
+      "ImageUrlCatalog": ""
+     },
+     "Tracking": null,
+     "IsZnowSku": true,
+     "PriceInDecimal": 6795,
+     "SpecialPriceInDecimal": 6342,
+     "SupplierName": "ZALORA",
+     "SupplierNameEn": "ZALORA",
+     "ReviewStatistics": {
+      "AvgRating": 4.8,
+      "ReviewCount": 5,
+      "StarPercentage": 4.75,
+      "MostMentionedTags": null
+     },
+     "ProductUrl": "p/new-balance-530-lifestyle-shoes-multi-4346155",
+     "IsMembershipEligible": true,
+     "Age": 75,
+     "ReplenishedAt": "",
+     "DepartmentCode": "LBO",
+     "IsExclusiveLaunch": false,
+     "IsBestPriceGuarantee": false,
+     "IsNonSaleItem": false
+    },
+    {
+     "ConfigSku": "E895FSH10F5B64GS",
+     "Name": "ARMR Slides",
+     "Price": "Php 1,795.00",
+     "SpecialPrice": "",
+     "Brand": "Under Armour",
+     "ImageList": [
+      "https://dynamic.zacdn.com/dcuGpHVgGmCA8-oTYPfMX5Wi8nQ=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/under-armour-8425-5426714-1.jpg",
+      "https://dynamic.zacdn.com/MaXvvwhOO0nPSEapbIB2X0XyRYc=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/under-armour-8425-5426714-2.jpg",
+      "https://dynamic.zacdn.com/o4sRr85OGnpA-Ad01eizHycxqn8=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/under-armour-8425-5426714-3.jpg",
+      "https://dynamic.zacdn.com/KpIYR6C5p4P0nikFAZdH3u2Ttfg=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/under-armour-8426-5426714-4.jpg",
+      "https://dynamic.zacdn.com/LkVkyIBH8MF5Wz5tWNuXF1HYPfw=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/under-armour-8426-5426714-5.jpg"
+     ],
+     "MainImageUrl": "https://dynamic.zacdn.com/dcuGpHVgGmCA8-oTYPfMX5Wi8nQ=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/under-armour-8425-5426714-1.jpg",
+     "Variations": [],
+     "Breadcrumbs": [
+      "Sports",
+      "Men's Sports",
+      "Footwear",
+      "Sneakers"
+     ],
+     "AdId": "",
+     "MarkdownLabel": "",
+     "SpecialLabel": "zalora_exclusive",
+     "HasDifferentSimplePrices": false,
+     "Overlays": [],
+     "OfficialstoreInformation": {
+      "Label": "",
+      "ImageUrlPdv": "",
+      "ImageUrlCatalog": ""
+     },
+     "Tracking": null,
+     "IsZnowSku": true,
+     "PriceInDecimal": 1795,
+     "SpecialPriceInDecimal": 0,
+     "SupplierName": "ZALORA",
+     "SupplierNameEn": "ZALORA",
+     "ReviewStatistics": {
+      "AvgRating": 4.8,
+      "ReviewCount": 28,
+      "StarPercentage": 4.75,
+      "MostMentionedTags": null
+     },
+     "ProductUrl": "p/under-armour-armr-slides-black-4176245",
+     "IsMembershipEligible": true,
+     "Age": 27,
+     "ReplenishedAt": "2026-09-14 00:00:00",
+     "DepartmentCode": "RBO",
+     "IsExclusiveLaunch": false,
+     "IsBestPriceGuarantee": false,
+     "IsNonSaleItem": false
+    },
+    {
+     "ConfigSku": "DCB26SHD759276GS",
+     "Name": "World Balance STREET SAVVY Men's Lifestyle Athleisure Shoes",
+     "Price": "Php 2,499.00",
+     "SpecialPrice": "",
+     "Brand": "World Balance",
+     "ImageList": [
+      "https://dynamic.zacdn.com/fdQknq0x66IrwS3M2O_MBdAc9yI=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5549-7019363-1.jpg",
+      "https://dynamic.zacdn.com/Cn4PtT2wiovNgRZ4HDSsx_JqkUc=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5549-7019363-2.jpg",
+      "https://dynamic.zacdn.com/QzFliNB8H7M2x_5zSV_9PGN367o=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5549-7019363-3.jpg",
+      "https://dynamic.zacdn.com/obAFoWUqNPdt4AR2hHa1xUEbAdo=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5550-7019363-4.jpg",
+      "https://dynamic.zacdn.com/46nxehS4uHv-cP-CK3HmqkZU8kA=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5550-7019363-5.jpg",
+      "https://dynamic.zacdn.com/96W1m3Dl74kr5UPr-4TRXo_f3as=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5550-7019363-6.jpg",
+      "https://dynamic.zacdn.com/fxhQII1K4l0-fPskOhsyAMlM5Tc=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5550-7019363-7.jpg",
+      "https://dynamic.zacdn.com/39MVPWkKAgdNjh7cgfNbiwOmHsE=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5550-7019363-8.jpg"
+     ],
+     "MainImageUrl": "https://dynamic.zacdn.com/fdQknq0x66IrwS3M2O_MBdAc9yI=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/world-balance-5549-7019363-1.jpg",
+     "Variations": [],
+     "Breadcrumbs": [
+      "Men",
+      "Shoes",
+      "Sneakers"
+     ],
+     "AdId": "",
+     "MarkdownLabel": "",
+     "SpecialLabel": "",
+     "HasDifferentSimplePrices": false,
+     "Overlays": [],
+     "OfficialstoreInformation": {
+      "Label": "",
+      "ImageUrlPdv": "",
+      "ImageUrlCatalog": ""
+     },
+     "Tracking": null,
+     "IsZnowSku": false,
+     "PriceInDecimal": 2499,
+     "SpecialPriceInDecimal": 0,
+     "SupplierName": "CHG GLOBAL Inc.",
+     "SupplierNameEn": "CHG GLOBAL Inc.",
+     "ReviewStatistics": {
+      "AvgRating": 4.5,
+      "ReviewCount": 2,
+      "StarPercentage": 4.5,
+      "MostMentionedTags": null
+     },
+     "ProductUrl": "p/world-balance-world-balance-street-savvy-men-s-lifestyle-athleisure-shoes-black-white-3639107",
+     "IsMembershipEligible": false,
+     "Age": 681,
+     "ReplenishedAt": "",
+     "DepartmentCode": "MP",
+     "IsExclusiveLaunch": false,
+     "IsBestPriceGuarantee": false,
+     "IsNonSaleItem": false
+    },
+    {
+     "ConfigSku": "06402ACF350DC4GS",
+     "Name": "Pre-Loved Christian Dior saddle AirPods Pro case earphone case leather blue",
+     "Price": "Php 46,230.00",
+     "SpecialPrice": "",
+     "Brand": "Christian Dior",
+     "ImageList": [
+      "https://dynamic.zacdn.com/Am3aqW7VilEqdAPjgeZcmoRTqcs=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-1.jpg",
+      "https://dynamic.zacdn.com/zwhpyDiGB8xOI8kUrK8skCvmNak=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-2.jpg",
+      "https://dynamic.zacdn.com/_yJcZR9t-RpJgRX-j903SmJtyiQ=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-3.jpg",
+      "https://dynamic.zacdn.com/rLh1tRsiHaggysNTSIBewgqv7oM=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-4.jpg",
+      "https://dynamic.zacdn.com/7tR7f8cbYfQj8chokHrBubG1ztU=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-5.jpg",
+      "https://dynamic.zacdn.com/tZ7dFGvR0odzPd2l7iiIG7MsT1Q=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-6.jpg",
+      "https://dynamic.zacdn.com/_ggyde4Cj8rAmQfMqFl1vLSv320=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-7.jpg"
+     ],
+     "MainImageUrl": "https://dynamic.zacdn.com/Am3aqW7VilEqdAPjgeZcmoRTqcs=/0x440/filters:quality(70):format(webp)/https://static-ph.zacdn.com/p/christian-dior-5769-9223024-1.jpg",
+     "Variations": [],
+     "Breadcrumbs": [
+      "Luxury",
+      "Pre-Loved",
+      "Women's Bags & Purses",
+      "Wallets & Purses"
+     ],
+     "AdId": "",
+     "MarkdownLabel": "",
+     "SpecialLabel": "zalora_exclusive",
+     "HasDifferentSimplePrices": false,
+     "Overlays": [],
+     "OfficialstoreInformation": {
+      "Label": "",
+      "ImageUrlPdv": "",
+      "ImageUrlCatalog": ""
+     },
+     "Tracking": null,
+     "IsZnowSku": false,
+     "PriceInDecimal": 46230,
+     "SpecialPriceInDecimal": 0,
+     "SupplierName": "RECLO JAPAN",
+     "SupplierNameEn": "RECLO JAPAN",
+     "ReviewStatistics": {
+      "AvgRating": 0,
+      "ReviewCount": 0,
+      "StarPercentage": 0,
+      "MostMentionedTags": null
+     },
+     "ProductUrl": "p/christian-dior-pre-loved-christian-dior-saddle-airpods-pro-case-earphone-case-leather-blue-blue-4203229",
+     "IsMembershipEligible": false,
+     "Age": 243,
+     "ReplenishedAt": "",
+     "DepartmentCode": "MP",
+     "IsExclusiveLaunch": false,
+     "IsBestPriceGuarantee": false,
+     "IsNonSaleItem": false
+    }
+   ],
+   "StoreEntry": {
+    "BackgroundImageUrl": "",
+    "Label": "",
+    "Stores": null
+   },
+   "Rcs": "",
+   "ZeroSearchResults": {
+    "OriginalSearchQuery": "",
+    "SuggestedSearchQuery": "",
+    "Suggestions": null
+   },
+   "Vendor": {
+    "Source": "dj"
+   },
+   "VisualSearchImageId": ""
+  }
+ },
+ "promotions": {
+  "data": {
+   "Promotions": {
+    "06402ACF350DC4GS": [
+     {
+      "TemplateType": "bonus_voucher",
+      "Code": "150OVER",
+      "CodeText": "Extra Php150 off",
+      "DescriptionText": "Min. spend Php2,000.00.",
+      "EffectivePrice": 46080,
+      "EffectivePriceFormatted": "Php 46,080.00",
+      "IsPaymentPromotion": false,
+      "PaymentMethod": "",
+      "CashbackType": "",
+      "PromotionIdentifier": "bonus_voucher_65865075",
+      "FromDateTime": "2026-10-11 07:00:00",
+      "ExpiredDateTime": "2026-10-11 12:59:59"
+     }
+    ],
+    "3EC0ASH5D42A5EGS": [
+     {
+      "TemplateType": "campaign_voucher",
+      "Code": "1010BASE98760",
+      "CodeText": "10% off",
+      "DescriptionText": "Min. spend Php1,195.00.",
+      "EffectivePrice": 5707.8,
+      "EffectivePriceFormatted": "Php 5,707.80",
+      "IsPaymentPromotion": false,
+      "PaymentMethod": "",
+      "CashbackType": "",
+      "PromotionIdentifier": "campaign_voucher_65861819",
+      "FromDateTime": "2026-10-09 18:30:00",
+      "ExpiredDateTime": "2026-10-15 12:30:00"
+     }
+    ],
+    "A35AFSH6D2ECF4GS": [
+     {
+      "TemplateType": "campaign_voucher",
+      "Code": "1050BASE62605",
+      "CodeText": "50% off",
+      "DescriptionText": "Min. spend Php2,995.00.",
+      "EffectivePrice": 2750,
+      "EffectivePriceFormatted": "Php 2,750.00",
+      "IsPaymentPromotion": false,
+      "PaymentMethod": "",
+      "CashbackType": "",
+      "PromotionIdentifier": "campaign_voucher_65861823",
+      "FromDateTime": "2026-10-09 18:30:00",
+      "ExpiredDateTime": "2026-10-15 12:30:00"
+     }
+    ],
+    "DCB26SHD759276GS": [
+     {
+      "TemplateType": "campaign_voucher",
+      "Code": "1030BASE30595",
+      "CodeText": "30% off",
+      "DescriptionText": "Min. spend Php2,295.00.",
+      "EffectivePrice": 1749.3,
+      "EffectivePriceFormatted": "Php 1,749.30",
+      "IsPaymentPromotion": false,
+      "PaymentMethod": "",
+      "CashbackType": "",
+      "PromotionIdentifier": "campaign_voucher_65861821",
+      "FromDateTime": "2026-10-09 18:30:00",
+      "ExpiredDateTime": "2026-10-15 12:30:00"
+     }
+    ],
+    "E895FSH10F5B64GS": [
+     {
+      "TemplateType": "bonus_voucher",
+      "Code": "150OVER",
+      "CodeText": "Extra Php150 off",
+      "DescriptionText": "Min. spend Php2,000.00.",
+      "EffectivePrice": 0,
+      "EffectivePriceFormatted": "",
+      "IsPaymentPromotion": false,
+      "PaymentMethod": "",
+      "CashbackType": "",
+      "PromotionIdentifier": "bonus_voucher_65865075",
+      "FromDateTime": "2026-10-11 07:00:00",
+      "ExpiredDateTime": "2026-10-11 12:59:59"
+     }
+    ]
+   },
+   "Gifts": {},
+   "BestStackableCombination": {
+    "3EC0ASH5D42A5EGS": {
+     "EffectivePrice": 5707.8
+    },
+    "A35AFSH6D2ECF4GS": {
+     "EffectivePrice": 2750
+    },
+    "DCB26SHD759276GS": {
+     "EffectivePrice": 1749.3
+    }
+   },
+   "MarkdownPricing": {}
+  }
+ }
+}

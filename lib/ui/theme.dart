@@ -32,6 +32,9 @@ class SiftColors extends ThemeExtension<SiftColors> {
     required this.saleFg,
     required this.neutralBg,
     required this.neutralFg,
+    required this.statusDone,
+    required this.statusBusy,
+    required this.statusAttention,
   });
 
   /// The accent's glow: text shadows, focused-field halo, backdrop wash.
@@ -48,6 +51,12 @@ class SiftColors extends ThemeExtension<SiftColors> {
   final Color saleFg;
   final Color neutralBg;
   final Color neutralFg;
+
+  /// Queue row indicators: all stores fetched / still searching / a store
+  /// needs the user (sign in, check, failed).
+  final Color statusDone;
+  final Color statusBusy;
+  final Color statusAttention;
 
   static SiftColors of(BuildContext context) => Theme.of(context).extension<SiftColors>()!;
 
@@ -68,6 +77,9 @@ class SiftColors extends ThemeExtension<SiftColors> {
       saleFg: l(saleFg, other.saleFg),
       neutralBg: l(neutralBg, other.neutralBg),
       neutralFg: l(neutralFg, other.neutralFg),
+      statusDone: l(statusDone, other.statusDone),
+      statusBusy: l(statusBusy, other.statusBusy),
+      statusAttention: l(statusAttention, other.statusAttention),
     );
   }
 }
@@ -105,6 +117,9 @@ ThemeData darkSide() {
       saleFg: Color(0xFF6EE7A8),
       neutralBg: Color(0xFF22222B),
       neutralFg: Color(0xFFC9C9D4),
+      statusDone: Color(0xFF34D399),
+      statusBusy: Color(0xFFFBBF24),
+      statusAttention: Color(0xFFFF4D5A),
     ),
   );
 }
@@ -131,6 +146,9 @@ ThemeData lightSide() {
       saleFg: Color(0xFF1B5E20),
       neutralBg: Color(0xFFE9ECEF),
       neutralFg: Color(0xFF343A40),
+      statusDone: Color(0xFF16A34A),
+      statusBusy: Color(0xFFD97706),
+      statusAttention: Color(0xFFDC2626),
     ),
   );
 }

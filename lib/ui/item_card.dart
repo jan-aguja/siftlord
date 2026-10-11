@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../models/item.dart';
 import '../pricing/price_check.dart';
+import '../queue/search_queue.dart';
 import 'store_style.dart';
 import 'theme.dart';
 
@@ -18,12 +19,18 @@ class ItemCard extends StatelessWidget {
     required this.storeName,
     this.verdict = PriceVerdict.none,
     this.ref,
+    this.pin,
+    this.onTogglePin,
   });
 
   final Item item;
   final String storeName;
   final PriceVerdict verdict;
   final PriceReference? ref;
+
+  /// Set when the user pinned this listing.
+  final Pin? pin;
+  final VoidCallback? onTogglePin;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +47,21 @@ class ItemCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    // Product photos are shot on white; keep it in both themes.
-                    color: Colors.white,
-                    child: _Thumb(url: item.imageUrl, fit: BoxFit.contain),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Container(
+                        // Product photos are shot on white; keep it in both themes.
+                        color: Colors.white,
+                        child: _Thumb(url: item.imageUrl, fit: BoxFit.contain),
+                      ),
+                      if (onTogglePin != null)
+                        Positioned(
+                          top: 6,
+                          right: 6,
+                          child: _PinButton(pinned: pin != null, onPressed: onTogglePin!),
+                        ),
+                    ],
                   ),
                 ),
               ),
@@ -53,6 +71,10 @@ class ItemCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (pin != null) ...[
+                    _PinNote(pin: pin!),
+                    const SizedBox(height: 8),
+                  ],
                   _Badges(item: item, storeName: storeName),
                   const SizedBox(height: 8),
                   Text(item.title, maxLines: 3, overflow: TextOverflow.ellipsis,
@@ -93,12 +115,18 @@ class ItemTile extends StatelessWidget {
     required this.storeName,
     this.verdict = PriceVerdict.none,
     this.ref,
+    this.pin,
+    this.onTogglePin,
   });
 
   final Item item;
   final String storeName;
   final PriceVerdict verdict;
   final PriceReference? ref;
+
+  /// Set when the user pinned this listing.
+  final Pin? pin;
+  final VoidCallback? onTogglePin;
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +151,10 @@ class ItemTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (pin != null) ...[
+                    _PinNote(pin: pin!),
+                    const SizedBox(height: 4),
+                  ],
                   Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis),
                   const SizedBox(height: 4),
                   _PriceLine(item: item),
@@ -137,9 +169,72 @@ class ItemTile extends StatelessWidget {
                 ],
               ),
             ),
+            if (onTogglePin != null)
+              IconButton(
+                tooltip: pin != null ? 'Unpin' : 'Pin to top',
+                visualDensity: VisualDensity.compact,
+                onPressed: onTogglePin,
+                icon: Icon(pin != null ? Icons.push_pin : Icons.push_pin_outlined,
+                    color: pin != null
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant),
+              ),
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Round pin toggle over the card's photo (the photo is always on white).
+class _PinButton extends StatelessWidget {
+  const _PinButton({required this.pinned, required this.onPressed});
+
+  final bool pinned;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Material(
+      color: pinned ? scheme.primary : Colors.black.withValues(alpha: 0.55),
+      shape: const CircleBorder(),
+      child: IconButton(
+        tooltip: pinned ? 'Unpin' : 'Pin to top',
+        onPressed: onPressed,
+        icon: Icon(pinned ? Icons.push_pin : Icons.push_pin_outlined, color: Colors.white),
+      ),
+    );
+  }
+}
+
+/// "Pinned", plus how the price moved since, or that the latest search
+/// didn't find it.
+class _PinNote extends StatelessWidget {
+  const _PinNote({required this.pin});
+
+  final Pin pin;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final sift = SiftColors.of(context);
+    final diff = pin.item.price - pin.pinnedPrice;
+    final (String note, Color color) = pin.missing
+        ? ('not in the latest results', sift.warnFg)
+        : diff.abs() < 1
+            ? ('', scheme.primary)
+            : diff < 0
+                ? ('${formatPeso(-diff)} less than when pinned', sift.saleFg)
+                : ('${formatPeso(diff)} more than when pinned', sift.warnFg);
+    final style = TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: color);
+    return Row(
+      children: [
+        Icon(Icons.push_pin, size: 14, color: scheme.primary),
+        const SizedBox(width: 4),
+        Text('Pinned', style: style.copyWith(color: scheme.primary)),
+        if (note.isNotEmpty) Flexible(child: Text(' · $note', style: style, overflow: TextOverflow.ellipsis)),
+      ],
     );
   }
 }
@@ -249,7 +344,8 @@ class _PriceLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final discount = item.discountPercent;
-    return Wrap(
+    final savings = item.voucherSavings;
+    final line = Wrap(
       crossAxisAlignment: WrapCrossAlignment.end,
       spacing: 8,
       children: [
@@ -261,6 +357,33 @@ class _PriceLine extends StatelessWidget {
               style: theme.textTheme.bodySmall?.copyWith(decoration: TextDecoration.lineThrough)),
           Text('-$discount%', style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.error)),
         ],
+      ],
+    );
+    if (savings == null) return line;
+    final sift = SiftColors.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        line,
+        const SizedBox(height: 4),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          decoration: BoxDecoration(color: sift.saleBg, borderRadius: BorderRadius.circular(4)),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.confirmation_number_outlined, size: 14, color: sift.saleFg),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  '${item.voucherCode != null ? '${formatPeso(savings)} off with code ${item.voucherCode}' : '${formatPeso(savings)} ${item.voucherLabel ?? 'voucher'} applied'} · '
+                  '${formatPeso(item.priceBeforeVouchers!)} before',
+                  style: TextStyle(color: sift.saleFg, fontSize: 12, fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -281,7 +404,7 @@ class _Badges extends StatelessWidget {
           child: Text(text, style: TextStyle(color: fg, fontSize: 11, fontWeight: FontWeight.w600)),
         );
     final tier = switch (item.sellerTier) {
-      SellerTier.mall => badge(mallLabel(item.storeId), scheme.onSurface, fg: scheme.surface),
+      SellerTier.mall => badge(mallLabel(item.storeId), mallBadgeColor),
       SellerTier.preferredPlus => badge('Preferred+', const Color(0xFFD9480F)),
       SellerTier.preferred => badge('Preferred', const Color(0xFFE8590C)),
       SellerTier.regular => null,
@@ -293,6 +416,7 @@ class _Badges extends StatelessWidget {
       if (item.condition == Condition.brandNew) badge('New', const Color(0xFF2B8A3E)),
       if (item.isOverseas) badge('Overseas seller', const Color(0xFF6741D9)),
       if (item.storePick != null) badge(item.storePick!, const Color(0xFF0B7285)),
+      if (item.soldOut) badge('Sold out', const Color(0xFF495057)),
       if (item.isAd) badge('Ad', scheme.outline),
     ]);
   }

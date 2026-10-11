@@ -21,7 +21,7 @@
       ],
       "price": {
         "min": 14290,
-        "max": 14990
+        "max": 16990
       },
       "checked": "2026-10-11"
     },
@@ -66,7 +66,7 @@
       ],
       "price": {
         "min": 31390,
-        "max": 59990
+        "max": 63990
       },
       "checked": "2026-10-11",
       "search": "apple ipad a16"
@@ -79,7 +79,11 @@
         "jbl flip 7",
         "flip 7"
       ],
-      "exclude": [],
+      "exclude": [
+        "galaxy",
+        "z flip",
+        "samsung"
+      ],
       "price": {
         "min": 5565,
         "max": 7999
@@ -122,7 +126,7 @@
         "grip"
       ],
       "price": {
-        "min": 32999,
+        "min": 31995,
         "max": 34995
       },
       "checked": "2026-10-11"
@@ -146,6 +150,2458 @@
         "max": 3375
       },
       "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-18-pro",
+      "name": "Apple iPhone 18 Pro",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 18 pro",
+        "iphone18 pro"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 94990,
+        "max": 189990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-18-pro-max",
+      "name": "Apple iPhone 18 Pro Max",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 18 pro max",
+        "iphone18 pro max",
+        "iphone 18 promax"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 99990,
+        "max": 194990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-duo",
+      "name": "Apple iPhone Duo",
+      "brand": "Apple",
+      "aliases": [
+        "iphone duo"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 159990,
+        "max": 254990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-air",
+      "name": "Apple iPhone Air",
+      "brand": "Apple",
+      "aliases": [
+        "iphone air"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 56990,
+        "max": 132990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-17",
+      "name": "Apple iPhone 17",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 17",
+        "iphone17"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "pro",
+        "17e"
+      ],
+      "price": {
+        "min": 56090,
+        "max": 85990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-17-pro",
+      "name": "Apple iPhone 17 Pro",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 17 pro",
+        "iphone17 pro"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "pro max"
+      ],
+      "price": {
+        "min": 77890,
+        "max": 102990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-17-pro-max",
+      "name": "Apple iPhone 17 Pro Max",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 17 pro max",
+        "iphone17 pro max",
+        "iphone 17 promax"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 84590,
+        "max": 157990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-17e",
+      "name": "Apple iPhone 17e",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 17e"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 54990,
+        "max": 70990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-16",
+      "name": "Apple iPhone 16",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 16",
+        "iphone16"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "pro",
+        "plus",
+        "16e"
+      ],
+      "price": {
+        "min": 48490,
+        "max": 62990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "iphone-16-plus",
+      "name": "Apple iPhone 16 Plus",
+      "brand": "Apple",
+      "aliases": [
+        "iphone 16 plus",
+        "iphone16 plus"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 52990,
+        "max": 69990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "ipad-air-m4",
+      "name": "Apple iPad Air (M4)",
+      "brand": "Apple",
+      "aliases": [
+        "ipad air m4",
+        "ipad air 11 m4",
+        "ipad air 13 m4",
+        "11 inch ipad air m4",
+        "13 inch ipad air m4",
+        "ipad air 8th gen"
+      ],
+      "exclude": [
+        "keyboard",
+        "book cover",
+        "folio",
+        "pencil",
+        "s pen",
+        "screen protector",
+        "paperlike",
+        "magic keyboard"
+      ],
+      "price": {
+        "min": 48190,
+        "max": 119990
+      },
+      "checked": "2026-10-11",
+      "search": "apple ipad air m4"
+    },
+    {
+      "id": "ipad-pro-m5",
+      "name": "Apple iPad Pro (M5)",
+      "brand": "Apple",
+      "aliases": [
+        "ipad pro m5",
+        "ipad pro 11 m5",
+        "ipad pro 13 m5",
+        "11 inch ipad pro m5",
+        "13 inch ipad pro m5"
+      ],
+      "exclude": [
+        "keyboard",
+        "book cover",
+        "folio",
+        "pencil",
+        "s pen",
+        "screen protector",
+        "paperlike",
+        "magic keyboard"
+      ],
+      "price": {
+        "min": 77390,
+        "max": 207990
+      },
+      "checked": "2026-10-11",
+      "search": "apple ipad pro m5"
+    },
+    {
+      "id": "ipad-mini-a17-pro",
+      "name": "Apple iPad mini (A17 Pro)",
+      "brand": "Apple",
+      "aliases": [
+        "ipad mini a17 pro",
+        "ipad mini 7",
+        "ipad mini 7th gen",
+        "ipad mini 7th generation"
+      ],
+      "exclude": [
+        "keyboard",
+        "book cover",
+        "folio",
+        "pencil",
+        "s pen",
+        "screen protector",
+        "paperlike"
+      ],
+      "price": {
+        "min": 42990,
+        "max": 73990
+      },
+      "checked": "2026-10-11",
+      "search": "apple ipad mini a17 pro"
+    },
+    {
+      "id": "macbook-air-m5",
+      "name": "Apple MacBook Air (M5)",
+      "brand": "Apple",
+      "aliases": [
+        "macbook air m5",
+        "macbook air 13 m5",
+        "macbook air 15 m5",
+        "13 inch macbook air m5",
+        "15 inch macbook air m5"
+      ],
+      "exclude": [
+        "sleeve",
+        "keyboard cover",
+        "hard shell",
+        "screen protector"
+      ],
+      "price": {
+        "min": 85490,
+        "max": 104990
+      },
+      "checked": "2026-10-11",
+      "search": "apple macbook air m5"
+    },
+    {
+      "id": "macbook-neo",
+      "name": "Apple MacBook Neo",
+      "brand": "Apple",
+      "aliases": [
+        "macbook neo"
+      ],
+      "exclude": [
+        "sleeve",
+        "keyboard cover",
+        "hard shell",
+        "screen protector"
+      ],
+      "price": {
+        "min": 47490,
+        "max": 56990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "macbook-pro-m5",
+      "name": "Apple MacBook Pro 14 (M5)",
+      "brand": "Apple",
+      "aliases": [
+        "macbook pro m5",
+        "macbook pro 14 m5",
+        "14 inch macbook pro m5"
+      ],
+      "exclude": [
+        "m5 pro",
+        "m5 max",
+        "sleeve",
+        "keyboard cover",
+        "hard shell",
+        "screen protector"
+      ],
+      "price": {
+        "min": 139990,
+        "max": 149740
+      },
+      "checked": "2026-10-11",
+      "search": "apple macbook pro m5"
+    },
+    {
+      "id": "macbook-pro-m5-pro-max",
+      "name": "Apple MacBook Pro (M5 Pro / M5 Max)",
+      "brand": "Apple",
+      "aliases": [
+        "macbook pro m5 pro",
+        "macbook pro m5 max",
+        "macbook pro 14 m5 pro",
+        "macbook pro 16 m5 pro",
+        "macbook pro 14 m5 max",
+        "macbook pro 16 m5 max"
+      ],
+      "exclude": [
+        "sleeve",
+        "keyboard cover",
+        "hard shell",
+        "screen protector"
+      ],
+      "price": {
+        "min": 179990,
+        "max": 359740
+      },
+      "checked": "2026-10-11",
+      "search": "apple macbook pro m5 pro"
+    },
+    {
+      "id": "apple-watch-series-12",
+      "name": "Apple Watch Series 12",
+      "brand": "Apple",
+      "aliases": [
+        "apple watch series 12",
+        "apple watch s12",
+        "watch series 12"
+      ],
+      "exclude": [
+        "bumper",
+        "screen protector",
+        "charger",
+        "charging dock"
+      ],
+      "price": {
+        "min": 28490,
+        "max": 68990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "apple-watch-ultra-4",
+      "name": "Apple Watch Ultra 4",
+      "brand": "Apple",
+      "aliases": [
+        "apple watch ultra 4",
+        "watch ultra 4"
+      ],
+      "exclude": [
+        "bumper",
+        "screen protector",
+        "charger",
+        "charging dock"
+      ],
+      "price": {
+        "min": 59990,
+        "max": 65990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "apple-watch-se-3",
+      "name": "Apple Watch SE 3",
+      "brand": "Apple",
+      "aliases": [
+        "apple watch se 3",
+        "apple watch se 3rd gen",
+        "apple watch se 3rd generation",
+        "watch se 3"
+      ],
+      "exclude": [
+        "bumper",
+        "screen protector",
+        "charger",
+        "charging dock"
+      ],
+      "price": {
+        "min": 17990,
+        "max": 22990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "airpods-5",
+      "name": "Apple AirPods 5",
+      "brand": "Apple",
+      "aliases": [
+        "airpods 5",
+        "airpods gen 5",
+        "airpods 5th gen",
+        "airpods 5th generation"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 9490,
+        "max": 10990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "airpods-max-2",
+      "name": "Apple AirPods Max 2",
+      "brand": "Apple",
+      "aliases": [
+        "airpods max 2",
+        "airpods max",
+        "airpods max gen 2",
+        "airpods max 2nd gen"
+      ],
+      "exclude": [
+        "ear pads",
+        "earpads",
+        "ear cushions",
+        "cushion",
+        "headband",
+        "stand",
+        "hanger"
+      ],
+      "price": {
+        "min": 34990,
+        "max": 36990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "airtag-2",
+      "name": "Apple AirTag (2nd generation)",
+      "brand": "Apple",
+      "aliases": [
+        "airtag",
+        "airtag 2",
+        "airtag 2nd gen",
+        "airtag 2nd generation",
+        "airtags"
+      ],
+      "exclude": [
+        "key ring",
+        "keychain",
+        "keyring",
+        "loop",
+        "wallet",
+        "collar",
+        "sticker",
+        "silicone"
+      ],
+      "price": {
+        "min": 1890,
+        "max": 6790
+      },
+      "checked": "2026-10-11",
+      "search": "apple airtag"
+    },
+    {
+      "id": "apple-pencil-pro",
+      "name": "Apple Pencil Pro",
+      "brand": "Apple",
+      "aliases": [
+        "apple pencil pro"
+      ],
+      "exclude": [
+        "nib",
+        "nibs",
+        "pencil tip",
+        "grip",
+        "holder",
+        "sleeve"
+      ],
+      "price": {
+        "min": 8290,
+        "max": 8990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "apple-pencil-usb-c",
+      "name": "Apple Pencil (USB-C)",
+      "brand": "Apple",
+      "aliases": [
+        "apple pencil usb c",
+        "apple pencil usb-c",
+        "apple pencil usbc"
+      ],
+      "exclude": [
+        "nib",
+        "nibs",
+        "pencil tip",
+        "grip",
+        "holder",
+        "sleeve"
+      ],
+      "price": {
+        "min": 4990,
+        "max": 4990
+      },
+      "checked": "2026-10-11",
+      "search": "apple pencil usb-c"
+    },
+    {
+      "id": "apple-pencil-2",
+      "name": "Apple Pencil (2nd generation)",
+      "brand": "Apple",
+      "aliases": [
+        "apple pencil 2",
+        "apple pencil 2nd gen",
+        "apple pencil 2nd generation",
+        "apple pencil gen 2"
+      ],
+      "exclude": [
+        "nib",
+        "nibs",
+        "pencil tip",
+        "grip",
+        "holder",
+        "sleeve"
+      ],
+      "price": {
+        "min": 8690,
+        "max": 8690
+      },
+      "checked": "2026-10-11",
+      "search": "apple pencil 2nd generation"
+    },
+    {
+      "id": "galaxy-s26",
+      "name": "Samsung Galaxy S26",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy s26",
+        "samsung s26"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "ultra",
+        "plus",
+        "fe"
+      ],
+      "price": {
+        "min": 64490,
+        "max": 82990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-s26-plus",
+      "name": "Samsung Galaxy S26 Plus",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy s26 plus",
+        "samsung s26 plus",
+        "s26 plus"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 72241,
+        "max": 98990
+      },
+      "checked": "2026-10-11",
+      "search": "samsung galaxy s26+"
+    },
+    {
+      "id": "galaxy-s26-ultra",
+      "name": "Samsung Galaxy S26 Ultra",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy s26 ultra",
+        "samsung s26 ultra",
+        "s26 ultra"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "s pen"
+      ],
+      "price": {
+        "min": 82441,
+        "max": 138990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-s26-fe",
+      "name": "Samsung Galaxy S26 FE",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy s26 fe",
+        "samsung s26 fe",
+        "s26 fe"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 46990,
+        "max": 67990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-s25-ultra",
+      "name": "Samsung Galaxy S25 Ultra",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy s25 ultra",
+        "samsung s25 ultra",
+        "s25 ultra"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "s pen"
+      ],
+      "price": {
+        "min": 64990,
+        "max": 110990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-z-fold8",
+      "name": "Samsung Galaxy Z Fold8",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy z fold8",
+        "galaxy z fold 8",
+        "galaxy fold8",
+        "galaxy fold 8",
+        "samsung fold 8"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "ultra"
+      ],
+      "price": {
+        "min": 106990,
+        "max": 151990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-z-fold8-ultra",
+      "name": "Samsung Galaxy Z Fold8 Ultra",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy z fold8 ultra",
+        "galaxy z fold 8 ultra",
+        "galaxy fold8 ultra",
+        "galaxy fold 8 ultra",
+        "samsung fold 8 ultra"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 120990,
+        "max": 165990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-z-fold7",
+      "name": "Samsung Galaxy Z Fold7",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy z fold7",
+        "galaxy z fold 7",
+        "galaxy fold7",
+        "galaxy fold 7",
+        "samsung fold 7"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 99951,
+        "max": 125890
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-z-flip8",
+      "name": "Samsung Galaxy Z Flip8",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy z flip8",
+        "galaxy z flip 8",
+        "z flip8",
+        "galaxy flip8",
+        "galaxy flip 8",
+        "samsung flip 8",
+        "samsung z flip 8"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "fold"
+      ],
+      "price": {
+        "min": 77990,
+        "max": 91990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-z-flip7",
+      "name": "Samsung Galaxy Z Flip7",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy z flip7",
+        "galaxy z flip 7",
+        "z flip7",
+        "galaxy flip7",
+        "galaxy flip 7",
+        "samsung flip 7",
+        "samsung z flip 7"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "fe",
+        "fold"
+      ],
+      "price": {
+        "min": 62806,
+        "max": 82190
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-a57",
+      "name": "Samsung Galaxy A57 5G",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy a57",
+        "samsung a57",
+        "galaxy a57 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 29961,
+        "max": 52190
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-a37",
+      "name": "Samsung Galaxy A37 5G",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy a37",
+        "samsung a37",
+        "galaxy a37 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 27711,
+        "max": 33990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-a27",
+      "name": "Samsung Galaxy A27 5G",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy a27",
+        "samsung a27",
+        "galaxy a27 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 26181,
+        "max": 29090
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-a17",
+      "name": "Samsung Galaxy A17",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy a17",
+        "samsung a17"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 14690,
+        "max": 26190
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-a17-5g",
+      "name": "Samsung Galaxy A17 5G",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy a17 5g",
+        "samsung a17 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 16490,
+        "max": 26190
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-tab-s11",
+      "name": "Samsung Galaxy Tab S11",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy tab s11",
+        "samsung tab s11",
+        "tab s11"
+      ],
+      "exclude": [
+        "keyboard",
+        "book cover",
+        "folio",
+        "pencil",
+        "s pen",
+        "screen protector",
+        "paperlike",
+        "ultra"
+      ],
+      "price": {
+        "min": 67490,
+        "max": 83890
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-tab-s11-ultra",
+      "name": "Samsung Galaxy Tab S11 Ultra",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy tab s11 ultra",
+        "samsung tab s11 ultra",
+        "tab s11 ultra"
+      ],
+      "exclude": [
+        "keyboard",
+        "book cover",
+        "folio",
+        "pencil",
+        "s pen",
+        "screen protector",
+        "paperlike"
+      ],
+      "price": {
+        "min": 83690,
+        "max": 101990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-tab-s10-fe",
+      "name": "Samsung Galaxy Tab S10 FE / FE Plus",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy tab s10 fe",
+        "samsung tab s10 fe",
+        "tab s10 fe",
+        "galaxy tab s10 fe plus"
+      ],
+      "exclude": [
+        "keyboard",
+        "book cover",
+        "folio",
+        "pencil",
+        "s pen",
+        "screen protector",
+        "paperlike"
+      ],
+      "price": {
+        "min": 31390,
+        "max": 52690
+      },
+      "checked": "2026-10-11",
+      "search": "samsung galaxy tab s10 fe"
+    },
+    {
+      "id": "galaxy-watch9",
+      "name": "Samsung Galaxy Watch9",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy watch9",
+        "galaxy watch 9",
+        "samsung watch 9"
+      ],
+      "exclude": [
+        "bumper",
+        "screen protector",
+        "charger",
+        "charging dock"
+      ],
+      "price": {
+        "min": 22990,
+        "max": 27990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-watch8",
+      "name": "Samsung Galaxy Watch8",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy watch8",
+        "galaxy watch 8",
+        "samsung watch 8"
+      ],
+      "exclude": [
+        "bumper",
+        "screen protector",
+        "charger",
+        "charging dock",
+        "classic"
+      ],
+      "price": {
+        "min": 21890,
+        "max": 24990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-watch8-classic",
+      "name": "Samsung Galaxy Watch8 Classic",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy watch8 classic",
+        "galaxy watch 8 classic",
+        "samsung watch 8 classic"
+      ],
+      "exclude": [
+        "bumper",
+        "screen protector",
+        "charger",
+        "charging dock"
+      ],
+      "price": {
+        "min": 31190,
+        "max": 31190
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-watch-ultra-2",
+      "name": "Samsung Galaxy Watch Ultra2",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy watch ultra2",
+        "galaxy watch ultra 2",
+        "samsung watch ultra 2"
+      ],
+      "exclude": [
+        "bumper",
+        "screen protector",
+        "charger",
+        "charging dock"
+      ],
+      "price": {
+        "min": 44990,
+        "max": 44990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-buds4-pro",
+      "name": "Samsung Galaxy Buds4 Pro",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy buds4 pro",
+        "galaxy buds 4 pro",
+        "samsung buds 4 pro"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 14990,
+        "max": 14990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-buds4",
+      "name": "Samsung Galaxy Buds4",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy buds4",
+        "galaxy buds 4",
+        "samsung buds 4"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 11490,
+        "max": 11490
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "galaxy-buds3-fe",
+      "name": "Samsung Galaxy Buds3 FE",
+      "brand": "Samsung",
+      "aliases": [
+        "galaxy buds3 fe",
+        "galaxy buds 3 fe",
+        "samsung buds 3 fe"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 7290,
+        "max": 7290
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "xiaomi-17",
+      "name": "Xiaomi 17",
+      "brand": "Xiaomi",
+      "aliases": [
+        "xiaomi 17"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "redmi",
+        "17t",
+        "pro",
+        "ultra",
+        "max"
+      ],
+      "price": {
+        "min": 53999,
+        "max": 62999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "xiaomi-17t",
+      "name": "Xiaomi 17T",
+      "brand": "Xiaomi",
+      "aliases": [
+        "xiaomi 17t"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "pro"
+      ],
+      "price": {
+        "min": 35999,
+        "max": 41999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "redmi-note-17-pro",
+      "name": "Xiaomi Redmi Note 17 Pro 5G",
+      "brand": "Xiaomi",
+      "aliases": [
+        "redmi note 17 pro",
+        "redmi note 17 pro 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 25799,
+        "max": 31999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "redmi-note-17-pro-max",
+      "name": "Xiaomi Redmi Note 17 Pro Max 5G",
+      "brand": "Xiaomi",
+      "aliases": [
+        "redmi note 17 pro max",
+        "redmi note 17 pro max 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 31489,
+        "max": 36999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "poco-f8-pro",
+      "name": "POCO F8 Pro",
+      "brand": "POCO",
+      "aliases": [
+        "poco f8 pro",
+        "xiaomi poco f8 pro"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 39999,
+        "max": 45999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "poco-x8-pro",
+      "name": "POCO X8 Pro",
+      "brand": "POCO",
+      "aliases": [
+        "poco x8 pro",
+        "xiaomi poco x8 pro"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "max"
+      ],
+      "price": {
+        "min": 29989,
+        "max": 32999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "infinix-note-60-pro",
+      "name": "Infinix NOTE 60 Pro",
+      "brand": "Infinix",
+      "aliases": [
+        "infinix note 60 pro"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 22674,
+        "max": 25999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "infinix-hot-70",
+      "name": "Infinix HOT 70",
+      "brand": "Infinix",
+      "aliases": [
+        "infinix hot 70"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 9576,
+        "max": 14999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "honor-600",
+      "name": "HONOR 600 5G",
+      "brand": "HONOR",
+      "aliases": [
+        "honor 600",
+        "honor 600 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "pro"
+      ],
+      "price": {
+        "min": 29999,
+        "max": 29999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "honor-600-pro",
+      "name": "HONOR 600 Pro 5G",
+      "brand": "HONOR",
+      "aliases": [
+        "honor 600 pro",
+        "honor 600 pro 5g"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 49999,
+        "max": 49999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "vivo-x300-fe",
+      "name": "vivo X300 FE",
+      "brand": "vivo",
+      "aliases": [
+        "vivo x300 fe"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 54999,
+        "max": 60999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "vivo-v60-lite",
+      "name": "vivo V60 Lite",
+      "brand": "vivo",
+      "aliases": [
+        "vivo v60 lite"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass"
+      ],
+      "price": {
+        "min": 20199,
+        "max": 21999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "nothing-phone-3",
+      "name": "Nothing Phone (3)",
+      "brand": "Nothing",
+      "aliases": [
+        "nothing phone 3",
+        "nothing phone (3)"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "3a"
+      ],
+      "price": {
+        "min": 40999,
+        "max": 46999
+      },
+      "checked": "2026-10-11",
+      "search": "nothing phone 3"
+    },
+    {
+      "id": "nothing-phone-4a",
+      "name": "Nothing Phone (4a)",
+      "brand": "Nothing",
+      "aliases": [
+        "nothing phone 4a",
+        "nothing phone (4a)"
+      ],
+      "exclude": [
+        "screen protector",
+        "tempered glass",
+        "lens protector",
+        "dummy",
+        "digitizer",
+        "housing",
+        "back glass",
+        "pro"
+      ],
+      "price": {
+        "min": 23990,
+        "max": 31990
+      },
+      "checked": "2026-10-11",
+      "search": "nothing phone 4a"
+    },
+    {
+      "id": "sony-wh-1000xm6",
+      "name": "Sony WH-1000XM6",
+      "brand": "Sony",
+      "aliases": [
+        "sony wh-1000xm6",
+        "wh-1000xm6",
+        "wh 1000xm6"
+      ],
+      "exclude": [
+        "ear pads",
+        "earpads",
+        "ear cushions",
+        "cushion",
+        "headband",
+        "stand",
+        "hanger"
+      ],
+      "price": {
+        "min": 19999,
+        "max": 27999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "sony-wh-1000xm5",
+      "name": "Sony WH-1000XM5",
+      "brand": "Sony",
+      "aliases": [
+        "sony wh-1000xm5",
+        "wh-1000xm5",
+        "wh 1000xm5"
+      ],
+      "exclude": [
+        "ear pads",
+        "earpads",
+        "ear cushions",
+        "cushion",
+        "headband",
+        "stand",
+        "hanger"
+      ],
+      "price": {
+        "min": 13999,
+        "max": 20999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "sony-wf-1000xm6",
+      "name": "Sony WF-1000XM6",
+      "brand": "Sony",
+      "aliases": [
+        "sony wf-1000xm6",
+        "wf-1000xm6",
+        "wf 1000xm6"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 14999,
+        "max": 18999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "sony-wf-1000xm5",
+      "name": "Sony WF-1000XM5",
+      "brand": "Sony",
+      "aliases": [
+        "sony wf-1000xm5",
+        "wf-1000xm5",
+        "wf 1000xm5"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 11999,
+        "max": 16999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "bose-qc-ultra-headphones",
+      "name": "Bose QuietComfort Ultra Headphones",
+      "brand": "Bose",
+      "aliases": [
+        "bose quietcomfort ultra headphones",
+        "quietcomfort ultra headphones",
+        "bose qc ultra headphones",
+        "qc ultra headphones"
+      ],
+      "exclude": [
+        "ear pads",
+        "earpads",
+        "ear cushions",
+        "cushion",
+        "headband",
+        "stand",
+        "hanger"
+      ],
+      "price": {
+        "min": 27900,
+        "max": 27900
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "jbl-charge-6",
+      "name": "JBL Charge 6",
+      "brand": "JBL",
+      "aliases": [
+        "jbl charge 6",
+        "jbl charge6"
+      ],
+      "exclude": [],
+      "price": {
+        "min": 7449,
+        "max": 10999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "jbl-clip-5",
+      "name": "JBL Clip 5",
+      "brand": "JBL",
+      "aliases": [
+        "jbl clip 5",
+        "jbl clip5"
+      ],
+      "exclude": [],
+      "price": {
+        "min": 2569,
+        "max": 3799
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "marshall-emberton-iii",
+      "name": "Marshall Emberton III",
+      "brand": "Marshall",
+      "aliases": [
+        "marshall emberton iii",
+        "marshall emberton 3",
+        "emberton iii",
+        "emberton 3"
+      ],
+      "exclude": [],
+      "price": {
+        "min": 10297,
+        "max": 10990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "marshall-major-v",
+      "name": "Marshall Major V",
+      "brand": "Marshall",
+      "aliases": [
+        "marshall major v",
+        "marshall major 5",
+        "major v headphones"
+      ],
+      "exclude": [
+        "ear pads",
+        "earpads",
+        "ear cushions",
+        "cushion",
+        "headband",
+        "stand",
+        "hanger"
+      ],
+      "price": {
+        "min": 8090,
+        "max": 8690
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "marshall-motif-ii",
+      "name": "Marshall Motif II ANC",
+      "brand": "Marshall",
+      "aliases": [
+        "marshall motif ii",
+        "marshall motif 2",
+        "motif ii anc"
+      ],
+      "exclude": [
+        "ear tips",
+        "eartips",
+        "left earbud",
+        "right earbud",
+        "charging case only"
+      ],
+      "price": {
+        "min": 9250,
+        "max": 10290
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "nothing-headphone-1",
+      "name": "Nothing Headphone (1)",
+      "brand": "Nothing",
+      "aliases": [
+        "nothing headphone 1",
+        "nothing headphone (1)"
+      ],
+      "exclude": [
+        "ear pads",
+        "earpads",
+        "ear cushions",
+        "cushion",
+        "headband",
+        "stand",
+        "hanger",
+        "pro"
+      ],
+      "price": {
+        "min": 14999,
+        "max": 14999
+      },
+      "checked": "2026-10-11",
+      "search": "nothing headphone 1"
+    },
+    {
+      "id": "ps5-slim",
+      "name": "Sony PlayStation 5 Slim",
+      "brand": "Sony",
+      "aliases": [
+        "ps5 slim",
+        "playstation 5 slim",
+        "ps5 slim disc",
+        "ps5 slim digital"
+      ],
+      "exclude": [
+        "game",
+        "controller",
+        "dualsense",
+        "headset",
+        "faceplate",
+        "console cover",
+        "cooling",
+        "fan",
+        "stand",
+        "skin",
+        "dock",
+        "disc drive"
+      ],
+      "price": {
+        "min": 38495,
+        "max": 44617
+      },
+      "checked": "2026-10-11",
+      "search": "ps5 slim console"
+    },
+    {
+      "id": "ps5-pro",
+      "name": "Sony PlayStation 5 Pro",
+      "brand": "Sony",
+      "aliases": [
+        "ps5 pro",
+        "playstation 5 pro"
+      ],
+      "exclude": [
+        "game",
+        "controller",
+        "dualsense",
+        "headset",
+        "faceplate",
+        "console cover",
+        "cooling",
+        "fan",
+        "stand",
+        "skin",
+        "dock",
+        "disc drive",
+        "pro controller"
+      ],
+      "price": {
+        "min": 74995,
+        "max": 74995
+      },
+      "checked": "2026-10-11",
+      "search": "ps5 pro console"
+    },
+    {
+      "id": "dualsense",
+      "name": "Sony DualSense Wireless Controller",
+      "brand": "Sony",
+      "aliases": [
+        "dualsense",
+        "dualsense wireless controller",
+        "ps5 controller",
+        "ps5 dualsense"
+      ],
+      "exclude": [
+        "edge",
+        "charging station",
+        "charger",
+        "dock",
+        "thumb grip",
+        "faceplate",
+        "shell",
+        "skin"
+      ],
+      "price": {
+        "min": 4688,
+        "max": 5411
+      },
+      "checked": "2026-10-11",
+      "search": "ps5 dualsense controller"
+    },
+    {
+      "id": "dualsense-edge",
+      "name": "Sony DualSense Edge Wireless Controller",
+      "brand": "Sony",
+      "aliases": [
+        "dualsense edge",
+        "ps5 dualsense edge"
+      ],
+      "exclude": [
+        "stick module",
+        "charging station",
+        "charger",
+        "dock",
+        "thumb grip",
+        "skin"
+      ],
+      "price": {
+        "min": 13178,
+        "max": 13178
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "playstation-portal",
+      "name": "Sony PlayStation Portal Remote Player",
+      "brand": "Sony",
+      "aliases": [
+        "playstation portal",
+        "ps portal",
+        "ps5 portal"
+      ],
+      "exclude": [
+        "dock",
+        "stand",
+        "skin",
+        "grip"
+      ],
+      "price": {
+        "min": 15950,
+        "max": 19995
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "switch-2-pro-controller",
+      "name": "Nintendo Switch 2 Pro Controller",
+      "brand": "Nintendo",
+      "aliases": [
+        "switch 2 pro controller",
+        "nintendo switch 2 pro controller"
+      ],
+      "exclude": [
+        "grip",
+        "charging",
+        "stand",
+        "skin",
+        "thumb"
+      ],
+      "price": {
+        "min": 4095,
+        "max": 4995
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "joy-con-2",
+      "name": "Nintendo Joy-Con 2",
+      "brand": "Nintendo",
+      "aliases": [
+        "joy-con 2",
+        "joycon 2",
+        "joy con 2",
+        "switch 2 joy-con",
+        "nintendo switch 2 joy-con 2"
+      ],
+      "exclude": [
+        "charging grip",
+        "grip",
+        "strap",
+        "skin",
+        "thumb"
+      ],
+      "price": {
+        "min": 2595,
+        "max": 5350
+      },
+      "checked": "2026-10-11",
+      "search": "nintendo switch 2 joy-con 2"
+    },
+    {
+      "id": "mario-kart-world",
+      "name": "Mario Kart World (Nintendo Switch 2)",
+      "brand": "Nintendo",
+      "aliases": [
+        "mario kart world"
+      ],
+      "exclude": [
+        "console",
+        "bundle",
+        "wheel",
+        "amiibo",
+        "controller"
+      ],
+      "price": {
+        "min": 4095,
+        "max": 4095
+      },
+      "checked": "2026-10-11",
+      "search": "mario kart world switch 2"
+    },
+    {
+      "id": "donkey-kong-bananza",
+      "name": "Donkey Kong Bananza (Nintendo Switch 2)",
+      "brand": "Nintendo",
+      "aliases": [
+        "donkey kong bananza",
+        "dk bananza"
+      ],
+      "exclude": [
+        "console",
+        "bundle",
+        "amiibo",
+        "controller"
+      ],
+      "price": {
+        "min": 3850,
+        "max": 3850
+      },
+      "checked": "2026-10-11",
+      "search": "donkey kong bananza"
+    },
+    {
+      "id": "pokemon-legends-z-a",
+      "name": "Pokémon Legends: Z-A",
+      "brand": "Nintendo",
+      "aliases": [
+        "pokemon legends z-a",
+        "pokemon legends za",
+        "pokémon legends z-a"
+      ],
+      "exclude": [
+        "mega dimension",
+        "amiibo",
+        "plush",
+        "card",
+        "tcg",
+        "booster",
+        "console",
+        "bundle"
+      ],
+      "price": {
+        "min": 2595,
+        "max": 3095
+      },
+      "checked": "2026-10-11",
+      "search": "pokemon legends z-a"
+    },
+    {
+      "id": "steam-deck-oled",
+      "name": "Valve Steam Deck OLED",
+      "brand": "Valve",
+      "aliases": [
+        "steam deck oled"
+      ],
+      "exclude": [
+        "dock",
+        "grip",
+        "modcase",
+        "back button",
+        "controller",
+        "bag"
+      ],
+      "price": {
+        "min": 54995,
+        "max": 64995
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "dji-osmo-pocket-3",
+      "name": "DJI Osmo Pocket 3",
+      "brand": "DJI",
+      "aliases": [
+        "dji osmo pocket 3",
+        "osmo pocket 3",
+        "dji pocket 3"
+      ],
+      "exclude": [
+        "mount",
+        "bag",
+        "pouch",
+        "filter",
+        "screen protector",
+        "tripod",
+        "selfie stick",
+        "handle"
+      ],
+      "price": {
+        "min": 20590,
+        "max": 30290
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "dji-osmo-pocket-4",
+      "name": "DJI Osmo Pocket 4",
+      "brand": "DJI",
+      "aliases": [
+        "dji osmo pocket 4",
+        "osmo pocket 4",
+        "dji pocket 4"
+      ],
+      "exclude": [
+        "mount",
+        "bag",
+        "pouch",
+        "filter",
+        "screen protector",
+        "tripod",
+        "selfie stick",
+        "handle"
+      ],
+      "price": {
+        "min": 27990,
+        "max": 34990
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "dji-mini-5-pro",
+      "name": "DJI Mini 5 Pro",
+      "brand": "DJI",
+      "aliases": [
+        "dji mini 5 pro"
+      ],
+      "exclude": [
+        "fly more",
+        "propeller",
+        "propellers",
+        "charging hub",
+        "battery",
+        "bag",
+        "landing gear",
+        "filter"
+      ],
+      "price": {
+        "min": 40283,
+        "max": 40690
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "dji-osmo-action-5-pro",
+      "name": "DJI Osmo Action 5 Pro",
+      "brand": "DJI",
+      "aliases": [
+        "dji osmo action 5 pro",
+        "osmo action 5 pro",
+        "dji action 5 pro"
+      ],
+      "exclude": [
+        "mount",
+        "bag",
+        "pouch",
+        "filter",
+        "screen protector",
+        "tripod",
+        "selfie stick"
+      ],
+      "price": {
+        "min": 19988,
+        "max": 20190
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "insta360-x5",
+      "name": "Insta360 X5",
+      "brand": "Insta360",
+      "aliases": [
+        "insta360 x5",
+        "insta 360 x5"
+      ],
+      "exclude": [
+        "mount",
+        "bag",
+        "pouch",
+        "filter",
+        "screen protector",
+        "tripod",
+        "selfie stick",
+        "lens guard"
+      ],
+      "price": {
+        "min": 30590,
+        "max": 35616
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "gopro-hero13-black",
+      "name": "GoPro HERO13 Black",
+      "brand": "GoPro",
+      "aliases": [
+        "gopro hero13",
+        "gopro hero 13",
+        "gopro hero13 black",
+        "hero13 black"
+      ],
+      "exclude": [
+        "mount",
+        "bag",
+        "pouch",
+        "filter",
+        "screen protector",
+        "tripod",
+        "selfie stick"
+      ],
+      "price": {
+        "min": 27079,
+        "max": 29999
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "dyson-airwrap",
+      "name": "Dyson Airwrap (i.d., Co-anda 2x, Origin)",
+      "brand": "Dyson",
+      "aliases": [
+        "dyson airwrap",
+        "airwrap i.d",
+        "airwrap id",
+        "airwrap co-anda",
+        "airwrap co-anda2x",
+        "airwrap origin"
+      ],
+      "exclude": [
+        "attachment",
+        "nozzle",
+        "diffuser",
+        "comb",
+        "filter",
+        "stand",
+        "holder",
+        "storage",
+        "organizer"
+      ],
+      "price": {
+        "min": 22685,
+        "max": 38900
+      },
+      "checked": "2026-10-11",
+      "search": "dyson airwrap"
+    },
+    {
+      "id": "dyson-supersonic",
+      "name": "Dyson Supersonic hair dryer (HD15, Nural, r, Travel)",
+      "brand": "Dyson",
+      "aliases": [
+        "dyson supersonic",
+        "supersonic nural",
+        "supersonic r",
+        "supersonic hd15",
+        "supersonic hd16",
+        "dyson hd15",
+        "dyson hd16"
+      ],
+      "exclude": [
+        "attachment",
+        "nozzle",
+        "diffuser",
+        "comb",
+        "filter",
+        "stand",
+        "holder",
+        "storage",
+        "organizer"
+      ],
+      "price": {
+        "min": 17998,
+        "max": 35900
+      },
+      "checked": "2026-10-11",
+      "search": "dyson supersonic"
+    },
+    {
+      "id": "dyson-airstrait",
+      "name": "Dyson Airstrait",
+      "brand": "Dyson",
+      "aliases": [
+        "dyson airstrait",
+        "airstrait"
+      ],
+      "exclude": [
+        "attachment",
+        "nozzle",
+        "diffuser",
+        "comb",
+        "filter",
+        "stand",
+        "holder",
+        "storage",
+        "organizer"
+      ],
+      "price": {
+        "min": 27920,
+        "max": 34900
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "dyson-v12-detect-slim",
+      "name": "Dyson V12 Detect Slim",
+      "brand": "Dyson",
+      "aliases": [
+        "dyson v12 detect slim",
+        "v12 detect slim",
+        "dyson v12 detect"
+      ],
+      "exclude": [
+        "filter",
+        "bracket",
+        "wall mount",
+        "spare battery",
+        "replacement battery"
+      ],
+      "price": {
+        "min": 44910,
+        "max": 49900
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "garmin-forerunner-165",
+      "name": "Garmin Forerunner 165",
+      "brand": "Garmin",
+      "aliases": [
+        "garmin forerunner 165",
+        "forerunner 165",
+        "fr165"
+      ],
+      "exclude": [
+        "screen protector",
+        "charging clip",
+        "bumper"
+      ],
+      "price": {
+        "min": 10190,
+        "max": 10490
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "garmin-forerunner-170",
+      "name": "Garmin Forerunner 170",
+      "brand": "Garmin",
+      "aliases": [
+        "garmin forerunner 170",
+        "forerunner 170",
+        "fr170"
+      ],
+      "exclude": [
+        "screen protector",
+        "charging clip",
+        "bumper"
+      ],
+      "price": {
+        "min": 18940,
+        "max": 19290
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "garmin-forerunner-570",
+      "name": "Garmin Forerunner 570",
+      "brand": "Garmin",
+      "aliases": [
+        "garmin forerunner 570",
+        "forerunner 570",
+        "fr570"
+      ],
+      "exclude": [
+        "screen protector",
+        "charging clip",
+        "bumper"
+      ],
+      "price": {
+        "min": 29990,
+        "max": 33290
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "garmin-forerunner-970",
+      "name": "Garmin Forerunner 970",
+      "brand": "Garmin",
+      "aliases": [
+        "garmin forerunner 970",
+        "forerunner 970",
+        "fr970"
+      ],
+      "exclude": [
+        "screen protector",
+        "charging clip",
+        "bumper"
+      ],
+      "price": {
+        "min": 45690,
+        "max": 45690
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "garmin-venu-4",
+      "name": "Garmin Venu 4",
+      "brand": "Garmin",
+      "aliases": [
+        "garmin venu 4",
+        "venu 4"
+      ],
+      "exclude": [
+        "screen protector",
+        "charging clip",
+        "bumper"
+      ],
+      "price": {
+        "min": 33290,
+        "max": 33290
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "logitech-mx-master-4",
+      "name": "Logitech MX Master 4",
+      "brand": "Logitech",
+      "aliases": [
+        "logitech mx master 4",
+        "mx master 4"
+      ],
+      "exclude": [
+        "mouse pad",
+        "mousepad",
+        "skin",
+        "grip tape",
+        "case"
+      ],
+      "price": {
+        "min": 7196,
+        "max": 7995
+      },
+      "checked": "2026-10-11"
+    },
+    {
+      "id": "kindle-paperwhite",
+      "name": "Amazon Kindle Paperwhite (12th gen)",
+      "brand": "Amazon",
+      "aliases": [
+        "kindle paperwhite",
+        "kindle paperwhite 12th gen",
+        "paperwhite 12th gen",
+        "kindle paperwhite signature edition"
+      ],
+      "exclude": [
+        "sleeve",
+        "screen protector",
+        "skin",
+        "stand"
+      ],
+      "price": {
+        "min": 10950,
+        "max": 13750
+      },
+      "checked": "2026-10-11",
+      "search": "kindle paperwhite"
     }
   ]
 }

@@ -29,13 +29,29 @@ class Item {
     this.condition,
     this.secondhandMarket = false,
     this.deliveryNote,
+    this.priceBeforeVouchers,
+    this.voucherLabel,
+    this.soldOut = false,
+    this.voucherCode,
   });
 
   final String storeId;
   final String title;
 
-  /// Price in pesos as the store shows it on the result card.
+  /// Price in pesos as the store shows it on the result card: after the
+  /// vouchers the store applies there (see [priceBeforeVouchers]).
   final double price;
+
+  /// The price before the store's own recommended vouchers, when the store
+  /// already took them off [price] on its search card. Coins and checkout
+  /// promos are never included: search results don't show them.
+  final double? priceBeforeVouchers;
+
+  /// What was taken off, e.g. "shop voucher".
+  final String? voucherLabel;
+
+  /// The code to enter at checkout for that voucher, when the store gives one.
+  final String? voucherCode;
   final double? originalPrice;
   final Uri url;
 
@@ -74,7 +90,79 @@ class Item {
   /// How you'd get it, when that isn't plain shipping ("Meetup only").
   final String? deliveryNote;
 
+  /// Listed but out of stock.
+  final bool soldOut;
+
+  /// Same listing across refreshes (prices and titles change; the link doesn't).
+  String get key => url.toString();
+
+  Map<String, Object?> toJson() => {
+        'store': storeId,
+        'title': title,
+        'price': price,
+        'url': url.toString(),
+        'rank': rank,
+        if (originalPrice != null) 'originalPrice': originalPrice,
+        if (imageUrl != null) 'image': imageUrl,
+        if (rating != null) 'rating': rating,
+        if (ratingCount != null) 'ratingCount': ratingCount,
+        if (soldCount != null) 'soldCount': soldCount,
+        if (soldText != null) 'soldText': soldText,
+        if (location != null) 'location': location,
+        if (shopName != null) 'shop': shopName,
+        if (brand != null) 'brand': brand,
+        if (isAd) 'ad': true,
+        if (sellerTier != SellerTier.regular) 'tier': sellerTier.name,
+        if (isOverseas) 'overseas': true,
+        if (fulfilledByStore) 'fulfilled': true,
+        if (storePick != null) 'pick': storePick,
+        if (condition != null) 'condition': condition!.name,
+        if (secondhandMarket) 'secondhand': true,
+        if (deliveryNote != null) 'delivery': deliveryNote,
+        if (priceBeforeVouchers != null) 'beforeVouchers': priceBeforeVouchers,
+        if (voucherLabel != null) 'voucher': voucherLabel,
+        if (soldOut) 'soldOut': true,
+        if (voucherCode != null) 'voucherCode': voucherCode,
+      };
+
+  factory Item.fromJson(Map<String, dynamic> j) {
+    double? d(String k) => (j[k] as num?)?.toDouble();
+    return Item(
+      storeId: j['store'] as String,
+      title: j['title'] as String,
+      price: d('price')!,
+      url: Uri.parse(j['url'] as String),
+      rank: j['rank'] as int? ?? 0,
+      originalPrice: d('originalPrice'),
+      imageUrl: j['image'] as String?,
+      rating: d('rating'),
+      ratingCount: j['ratingCount'] as int?,
+      soldCount: j['soldCount'] as int?,
+      soldText: j['soldText'] as String?,
+      location: j['location'] as String?,
+      shopName: j['shop'] as String?,
+      brand: j['brand'] as String?,
+      isAd: j['ad'] == true,
+      sellerTier: SellerTier.values.asNameMap()[j['tier']] ?? SellerTier.regular,
+      isOverseas: j['overseas'] == true,
+      fulfilledByStore: j['fulfilled'] == true,
+      storePick: j['pick'] as String?,
+      condition: Condition.values.asNameMap()[j['condition']],
+      secondhandMarket: j['secondhand'] == true,
+      deliveryNote: j['delivery'] as String?,
+      priceBeforeVouchers: d('beforeVouchers'),
+      voucherLabel: j['voucher'] as String?,
+      soldOut: j['soldOut'] == true,
+      voucherCode: j['voucherCode'] as String?,
+    );
+  }
+
   bool get isOfficial => sellerTier == SellerTier.mall;
+
+  double? get voucherSavings {
+    final before = priceBeforeVouchers;
+    return before == null || before <= price ? null : before - price;
+  }
 
   int? get discountPercent {
     final orig = originalPrice;

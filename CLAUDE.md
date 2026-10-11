@@ -1,8 +1,15 @@
 # Sift Lord (repo: siftlord)
 
-Flutter app (Android + iOS) that searches Lazada PH and Shopee PH at once and shows the results as
+Flutter app (Android + iOS) that searches Lazada PH, Shopee PH, Zalora PH, Datablitz and (optionally)
+Facebook Marketplace at once and shows the results as
 calm, ad-free cards; tapping one opens the product in the store's own app. Bundle/app ID:
 `com.jandroid.siftlord`. Stage: proof of concept for Jan and his wife. No monetization work yet.
+
+Not a Philippine-only app: the PH stores are where it starts (Lazada/Shopee are a good barometer
+because they're so closed), but it's meant to go global. Planned: international stores (e.g. Amazon)
+and a default app currency, with foreign prices converted at the prevailing rate. Don't bake
+"PH only" or peso-only assumptions into new code or copy; `formatPeso` and peso catalog prices
+are today's state, not the design.
 
 ## The model (decided — don't re-propose alternatives)
 
@@ -11,7 +18,7 @@ calm, ad-free cards; tapping one opens the product in the store's own app. Bundl
   one switch.
 - Logins belong to the user: they sign in on the store's own page inside our WebView
   (`StoreWebScreen`). Cookies are shared with the hidden WebViews. We never see credentials.
-- POC scope is Lazada + Shopee only. Generic "any store" extraction comes later.
+- Stores are added one adapter at a time (`lib/stores/`); generic "any store" extraction comes later.
 
 ## How each store is read (verified 2026-10-11)
 
@@ -27,6 +34,31 @@ calm, ad-free cards; tapping one opens the product in the store's own app. Bundl
   In a WebView, Shopee's login page hides Google/Facebook sign-in (Google blocks OAuth in embedded
   WebViews). Users with Google-linked accounts use "Log In with Phone Number" (SMS code); the app
   shows a hint for this. Don't spoof the UA to bring the Google button back.
+  Vouchers: use `item_card_display_price.price` (present in both formats). When the card carries a
+  `recommended_shop_voucher_info` / `recommended_platform_voucher_info`, that price already has
+  the voucher off `applied_product_promo_price` (₱6,199 − ₱200 = ₱5,999 shown); the card shows
+  "₱200 shop voucher applied". It's also the card's own variant, not the cheapest-variant
+  `item_basic.price` bait. Voucher info seems to come only when signed in. Lazada search data has
+  no voucher amount (its "Voucher save X%" label is just the item's discount; extra vouchers live
+  on product pages only), so Lazada prices are as listed. Coins are never in search results.
+
+- **Zalora** — works logged out, any UA. The Next.js search page loads products afterwards from
+  `api.zalora.com.ph`, which allows our origin with credentials, so the load-stop script repeats
+  the page's two calls: `/v1/dynproducts/datajet/list?shop=m&…&query=` (`shop=m` is required) and
+  `/v1/promotions?config_sku=…`. Both need `Accept: application/json` (else protobuf). Prices are
+  pesos. Zalora's own cards show the price after vouchers; we take the lowest single-item
+  `EffectivePrice` (min spend already checked) or `BestStackableCombination`, skip cart rules
+  ("buy 3") and bank promos, and show the code to enter (`Item.voucherCode`).
+  `DepartmentCode == "MP"` = marketplace seller (shop name shown); anything else is Zalora's own
+  stock ("Fulfilled by Zalora"). Never Mall tier. Anti-bot is PerimeterX (never seen blocking).
+- **Datablitz** (`ecommerce.datablitz.com.ph`, Jan's request) — Shopify, but search cards come from
+  the Boost search app (`services.mybcapps.com/bc-sf-filter/search`, JSONP on the page, plain JSON
+  with CORS `*` without `callback`); the load-stop script repeats it with the page's
+  `boostPFSConfig`, 48 per page. Prices are pesos (variant `price`; the `*_php` fields are stale).
+  Datablitz is an authorized retailer, so every item is Mall tier (counts as official). Sold-out
+  items stay, marked `soldOut`. "Pre-Order Downpayment" items are dropped (the price is a deposit).
+  Matching is loose and titles lead with the platform ("Nintendo Switch 2 Yakuza Kiwami"), which
+  is why official listings far under the usual price get no tag (see Price check).
 
 Seller data: Shopee (mobile UA serves the `item_basic` format) has `is_official_shop` (Mall),
 `is_preferred_plus_seller`, `shopee_verified` (shown as Preferred — inferred, not confirmed),
@@ -41,7 +73,8 @@ Three tiers, decided with Jan: (1) a product in `assets/catalog.json` → its us
 (2) else the robust median of ≥2 official (Mall/LazMall, incl. authorized resellers like Power Mac
 Center) listings that claim the searched product and aren't accessories; (3) else no tags.
 Listings that claim the product at < 0.6× usual get "Price looks off" (official store: green
-"Big sale"); > 1.5× gets "Price looks high". Wording is always a nudge to check, never "fake".
+"Big sale", but under 0.35× an official listing is taken to be another item naming the product,
+e.g. a game, and gets no tag); > 1.5× gets "Price looks high". Wording is always a nudge to check, never "fake".
 Honest accessories ("case", "tips", catalog `exclude` phrases) get no tag, but "for…/compatible"
 titles still do, since knockoffs use them. Titles that say they're made *for* the product
 ("For Original AirPods Pro2", "charger for MacBook", "compatible with") get a neutral
@@ -62,6 +95,22 @@ official stores stop selling them, tier 2 has nothing to go on.
   Price alerts use 0.35× instead of 0.6× here unless the title says brand new.
 
 Store on/off and the Marketplace city live in `StoreSettings` (side menu). Marketplace defaults off.
+
+Queue rows show a picture, the query, "From ₱…", per-store counts and a status strip
+(`SearchJob.health`: green all fetched, amber searching, red a store needs the user). "From" is
+`PriceCheck.lowestFair`: the cheapest listing that claims the product, skipping ads, used, sold-out,
+third-party, and anything under 0.6× usual ("Big sale" included). The picture is the user's pin,
+else the catalog's learned photo, else an official listing of the product at a believable price,
+else a placeholder: never a random seller's photo.
+Searches persist with their last results and pins (`SearchArchive`, `searches.json` in app
+support); they are not re-run on launch except hearted ones older than 6 h. Swipe right refreshes
+(also adds stores turned on since), swipe left removes; a failed refresh keeps the old results.
+Hearted searches (`SearchJob.saved`) list first and survive swipe, Clear and auto-cleanup
+(`StoreSettings.autoCleanupDays`, off by default, counted from the last refresh). Pins
+(`SearchJob.pins`) sit at the top of results and keep the last copy seen (marked when a refresh no
+longer finds it, with the price change since pinning). A search's first pin hearts it once
+(`pinHearted`); if the user unhearts it later, that sticks. The side menu lists stores most
+recently turned on first, ordered when it opens (rows don't jump while toggling).
 
 Code: `lib/stores/` (one adapter per store, plus `store_runner.dart` for the hidden WebView),
 `lib/queue/` (jobs; stores run in parallel within a job, max 2 jobs at once), `lib/ui/`.

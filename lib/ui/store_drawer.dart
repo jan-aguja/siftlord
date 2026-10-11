@@ -5,15 +5,29 @@ import '../stores/store_settings.dart';
 import 'store_style.dart';
 import 'theme.dart';
 
-/// Pick which stores new searches use, Marketplace's city, and the look.
-class StoreDrawer extends StatelessWidget {
+/// Pick which stores new searches use, Marketplace's city, clean-up, and
+/// the look.
+class StoreDrawer extends StatefulWidget {
   const StoreDrawer({super.key, required this.settings});
 
   final StoreSettings settings;
 
+  @override
+  State<StoreDrawer> createState() => _StoreDrawerState();
+}
+
+class _StoreDrawerState extends State<StoreDrawer> {
+  // Stores you've turned on lately come first. The order is taken when the
+  // menu opens, so a row doesn't jump away from your finger as you toggle it.
+  late final _order = widget.settings.orderedStores;
+
+  StoreSettings get settings => widget.settings;
+
   static const _subtitles = {
     'lazada': 'Works without signing in',
     'shopee': 'May ask you to sign in',
+    'zalora': 'Fashion. Works without signing in',
+    'datablitz': 'Games and gadgets. Works without signing in',
     'facebook': 'People selling near you, often used. Searched without signing in.',
   };
 
@@ -47,7 +61,7 @@ class StoreDrawer extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                 child: Text('New searches use the stores that are on.', style: theme.textTheme.bodySmall),
               ),
-              for (final store in settings.stores) ...[
+              for (final store in _order) ...[
                 SwitchListTile(
                   secondary: CircleAvatar(
                     backgroundColor: storeColor(store.id),
@@ -73,6 +87,33 @@ class StoreDrawer extends StatelessWidget {
                     ),
                   ),
               ],
+              const Divider(height: 32),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 2),
+                child: Text('SEARCHES', style: sectionLabel(context)),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: Text('Hearted searches are always kept.', style: theme.textTheme.bodySmall),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: DropdownButtonFormField<int?>(
+                  initialValue: settings.autoCleanupDays,
+                  isExpanded: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Remove other searches',
+                    helperText: 'Counted from their last refresh',
+                    isDense: true,
+                  ),
+                  items: [
+                    const DropdownMenuItem(value: null, child: Text('Never')),
+                    for (final d in StoreSettings.cleanupChoices)
+                      DropdownMenuItem(value: d, child: Text('After $d days')),
+                  ],
+                  onChanged: (d) => settings.autoCleanupDays = d,
+                ),
+              ),
               const Divider(height: 32),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),

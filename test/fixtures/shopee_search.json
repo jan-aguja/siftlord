@@ -87,6 +87,57 @@
     "is_shopee_choice": true,
     "shop_name": "Overseas Shop"
    }
+  },
+  {
+   "itemid": 9,
+   "shopid": 10,
+   "item_basic": {
+    "itemid": 9,
+    "shopid": 10,
+    "name": "JBL Flip 7 Portable Waterproof",
+    "price": 619900000,
+    "price_min": 619900000,
+    "image": "ghi",
+    "shop_location": "Pasig City, Metro Manila",
+    "item_card_display_price": {
+     "price": 599900000,
+     "strikethrough_price": 799900000,
+     "applied_product_promo_price": 619900000,
+     "recommended_shop_voucher_info": {
+      "voucher_code": "SHOP200",
+      "voucher_discount": 20000000,
+      "min_spend": 400000000
+     },
+     "recommended_platform_voucher_info": null,
+     "display_price_asset": {
+      "display_final_price_icon": true
+     }
+    }
+   }
+  },
+  {
+   "itemid": 11,
+   "shopid": 12,
+   "item_basic": {
+    "itemid": 11,
+    "shopid": 12,
+    "name": "Speaker with variants",
+    "price": 49900000,
+    "price_min": 49900000,
+    "image": "jkl",
+    "item_card_display_price": {
+     "price": 66800000,
+     "strikethrough_price": 153400000,
+     "applied_product_promo_price": 67300000,
+     "recommended_shop_voucher_info": {
+      "voucher_discount": 500000,
+      "min_spend": 0
+     },
+     "display_price_asset": {
+      "display_final_price_icon": true
+     }
+    }
+   }
   }
  ]
 }

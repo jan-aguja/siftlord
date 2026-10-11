@@ -1,5 +1,5 @@
 name: siftlord
-description: "Search Lazada and Shopee in one calm list."
+description: "Search many stores at once, in one calm list."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -37,6 +37,7 @@ dependencies:
   flutter_inappwebview: 6.2.0-beta.3
   url_launcher: ^6.3.3
   shared_preferences: ^2.5.6
+  path_provider: ^2.1.6
 
 dev_dependencies:
   flutter_test:

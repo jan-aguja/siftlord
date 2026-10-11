@@ -130,7 +130,8 @@ $jsSendHelper
     }
     final title = asset['name'] as String?;
     final priceInfo = data['item_card_display_price'] as Map<String, dynamic>?;
-    final price = _price(priceInfo?['price']);
+    final card = _cardPrice(priceInfo);
+    final price = card?.price;
     final url = _productUrl(data['shopid'] ?? e['shopid'], data['itemid'] ?? e['itemid']);
     if (title == null || price == null || url == null) return null;
 
@@ -151,6 +152,8 @@ $jsSendHelper
       rank: rank,
       title: title,
       price: price,
+      priceBeforeVouchers: card?.beforeVouchers,
+      voucherLabel: card?.voucherLabel,
       originalPrice: _price(priceInfo?['strikethrough_price']) ??
           _price(priceInfo?['original_price']),
       url: url,
@@ -178,7 +181,10 @@ $jsSendHelper
     final b = e['item_basic'];
     if (b is! Map<String, dynamic>) return null;
     final title = b['name'] as String?;
-    final price = _price(b['price']) ?? _price(b['price_min']);
+    // The card price is for the variant Shopee's own card shows, after its
+    // recommended vouchers; `price` alone is the cheapest variant before them.
+    final card = _cardPrice(b['item_card_display_price'] as Map<String, dynamic>?);
+    final price = card?.price ?? _price(b['price']) ?? _price(b['price_min']);
     final url = _productUrl(b['shopid'], b['itemid']);
     if (title == null || price == null || url == null) return null;
     final rating = b['item_rating'] as Map<String, dynamic>?;
@@ -190,7 +196,11 @@ $jsSendHelper
       rank: rank,
       title: title,
       price: price,
-      originalPrice: _price(b['price_before_discount']),
+      priceBeforeVouchers: card?.beforeVouchers,
+      voucherLabel: card?.voucherLabel,
+      originalPrice: _price(
+          (b['item_card_display_price'] as Map<String, dynamic>?)?['strikethrough_price']) ??
+          _price(b['price_before_discount']),
       url: url,
       imageUrl: _image(b['image'] as String?),
       rating: (rating?['rating_star'] as num?)?.toDouble(),
@@ -213,6 +223,23 @@ $jsSendHelper
       fulfilledByStore: b['is_service_by_shopee'] == true,
       storePick: b['is_shopee_choice'] == true ? 'Shopee Choice' : null,
     );
+  }
+
+  /// Reads `item_card_display_price`. When Shopee marks it a final price, its
+  /// `price` already has the recommended shop/platform voucher taken off
+  /// `applied_product_promo_price` (verified: ₱6,199 − ₱200 shop voucher =
+  /// ₱5,999 shown).
+  ({double price, double? beforeVouchers, String? voucherLabel})? _cardPrice(Map<String, dynamic>? d) {
+    final price = _price(d?['price']);
+    if (d == null || price == null) return null;
+    final before = _price(d['applied_product_promo_price']);
+    final shop = d['recommended_shop_voucher_info'] is Map;
+    final platform = d['recommended_platform_voucher_info'] is Map;
+    if (before == null || before <= price || !(shop || platform)) {
+      return (price: price, beforeVouchers: null, voucherLabel: null);
+    }
+    final label = shop && platform ? 'vouchers' : shop ? 'shop voucher' : 'Shopee voucher';
+    return (price: price, beforeVouchers: before, voucherLabel: label);
   }
 
   bool _isAd(Map<String, dynamic> e) {

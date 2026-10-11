@@ -67,6 +67,42 @@ class _HomeScreenState extends State<HomeScreen> {
     return 'Search ${names.sublist(0, names.length - 1).join(', ')} and ${names.last}';
   }
 
+  void _snack(String text) => ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(SnackBar(content: Text(text)));
+
+  void _refresh(SearchJob job) {
+    widget.queue.refresh(job, also: widget.settings.enabledStores);
+    _snack('Searching "${job.query}" again for fresh prices.');
+  }
+
+  Future<void> _confirmClear() async {
+    final queue = widget.queue;
+    final n = queue.jobs.where((j) => !j.saved).length;
+    final kept = queue.jobs.length - n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Clear $n search${n == 1 ? '' : 'es'}?'),
+        content: Text(kept == 0
+            ? 'Heart a search to keep it through clean-ups.'
+            : 'Your $kept hearted search${kept == 1 ? '' : 'es'} stay${kept == 1 ? 's' : ''}.'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Clear')),
+        ],
+      ),
+    );
+    if (ok == true) queue.clearUnsaved();
+  }
+
+  Widget _swipeBackground(Color color, IconData icon, Alignment align) => Container(
+        decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(18)),
+        alignment: align,
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Icon(icon),
+      );
+
   void _open(SearchJob job) => Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) => ResultsScreen(
@@ -170,25 +206,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     final jobs = queue.jobs;
                     if (jobs.isEmpty) return const _EmptyQueue();
                     return ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-                      itemCount: jobs.length,
-                      separatorBuilder: (_, _) => const SizedBox(height: 10),
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+                      itemCount: jobs.length + 2,
+                      separatorBuilder: (_, i) => SizedBox(height: i == 0 ? 6 : 10),
                       itemBuilder: (context, i) {
-                        final job = jobs[i];
+                        if (i == 0) return _QueueHeader(queue: queue, onClear: _confirmClear);
+                        if (i == jobs.length + 1) return const _QueueFooter();
+                        final job = jobs[i - 1];
                         return Dismissible(
                           key: ValueKey(job.id),
-                          direction: DismissDirection.endToStart,
-                          background: Container(
-                            decoration: BoxDecoration(
-                              color: scheme.errorContainer,
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            alignment: Alignment.centerRight,
-                            padding: const EdgeInsets.only(right: 24),
-                            child: const Icon(Icons.delete_outline),
-                          ),
+                          background: _swipeBackground(
+                              sift.statusDone.withValues(alpha: 0.25), Icons.refresh, Alignment.centerLeft),
+                          secondaryBackground: _swipeBackground(
+                              scheme.errorContainer, Icons.delete_outline, Alignment.centerRight),
+                          confirmDismiss: (direction) async {
+                            if (direction == DismissDirection.startToEnd) {
+                              _refresh(job);
+                              return false;
+                            }
+                            if (!job.saved) return true;
+                            _snack('Saved searches stay put. Tap the heart to unsave it first.');
+                            return false;
+                          },
                           onDismissed: (_) => queue.remove(job),
-                          child: _QueueRow(queue: queue, job: job, onTap: () => _open(job)),
+                          child: _QueueRow(
+                            queue: queue,
+                            pricing: widget.pricing,
+                            job: job,
+                            onTap: () => _open(job),
+                          ),
                         );
                       },
                     );
@@ -203,11 +249,74 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-/// One queued search: a panel with a thin progress line while it runs.
-class _QueueRow extends StatelessWidget {
-  const _QueueRow({required this.queue, required this.job, required this.onTap});
+/// "YOUR SEARCHES · 4" and, when there's something to clear, a Clear button.
+class _QueueHeader extends StatelessWidget {
+  const _QueueHeader({required this.queue, required this.onClear});
 
   final SearchQueue queue;
+  final VoidCallback onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    final jobs = queue.jobs;
+    final clearable = jobs.any((j) => !j.saved);
+    return SizedBox(
+      height: 40,
+      child: Row(
+        children: [
+          Text('YOUR SEARCHES · ${jobs.length}', style: sectionLabel(context)),
+          const Spacer(),
+          if (clearable)
+            TextButton.icon(
+              onPressed: onClear,
+              icon: const Icon(Icons.cleaning_services_outlined, size: 18),
+              label: const Text('Clear'),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The emblem, small and dim, under the last search, with the gestures:
+/// the empty-queue art only shows on day one, this stays.
+class _QueueFooter extends StatelessWidget {
+  const _QueueFooter();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 28),
+      child: Column(
+        children: [
+          Opacity(
+            opacity: 0.35,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: Image.asset('assets/icon/siftlord_icon.png', width: 48, height: 48),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Swipe right to refresh prices, left to remove.\nHearted searches stay through clean-ups.',
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// One queued search: a status strip (green all fetched, amber searching,
+/// red a store needs you), the query, per-store summary, the lowest fair
+/// price, and a heart.
+class _QueueRow extends StatelessWidget {
+  const _QueueRow({required this.queue, required this.pricing, required this.job, required this.onTap});
+
+  final SearchQueue queue;
+  final Pricing pricing;
   final SearchJob job;
   final VoidCallback onTap;
 
@@ -215,39 +324,101 @@ class _QueueRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final sift = SiftColors.of(context);
+    final (Color status, String statusLabel) = switch (job.health) {
+      JobHealth.done => (sift.statusDone, 'All stores fetched'),
+      JobHealth.busy => (sift.statusBusy, 'Still searching'),
+      JobHealth.attention => (sift.statusAttention, 'A store needs you'),
+    };
+    final lowest = pricing.check.lowestFair(job.query, job.items);
+    final muted = theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final facts = [
+      if (job.pins.isNotEmpty) '${job.pins.length} pinned',
+      if (!job.isRunning) 'updated ${timeAgo(job.updatedAt)}',
+    ];
     return Material(
       color: sift.panel,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
-        side: BorderSide(color: job.isRunning ? sift.glow.withValues(alpha: 0.5) : sift.hairline),
+        side: BorderSide(color: job.saved ? theme.colorScheme.primary.withValues(alpha: 0.45) : sift.hairline),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 14, 8, 14),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(job.query,
-                            style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
-                        const SizedBox(height: 6),
-                        StoreStatusSummary(queue: queue, job: job),
-                      ],
-                    ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Semantics(
+                label: statusLabel,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: 5,
+                  decoration: BoxDecoration(
+                    color: status,
+                    boxShadow: [BoxShadow(color: status.withValues(alpha: 0.6), blurRadius: 8)],
                   ),
-                  Icon(Icons.chevron_right, color: theme.colorScheme.onSurfaceVariant),
-                ],
+                ),
               ),
-            ),
-            if (job.isRunning) const LinearProgressIndicator(minHeight: 2),
-          ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 12, 0, 12),
+                      child: Row(
+                        children: [
+                          ProductThumb(
+                            url: pricing.pictureFor(job.query, job.items,
+                                pinned: job.pins.isEmpty ? null : job.pins.last.item),
+                            size: 56,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(job.query,
+                                    style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+                                if (lowest != null) ...[
+                                  const SizedBox(height: 2),
+                                  Text.rich(
+                                    TextSpan(children: [
+                                      TextSpan(text: 'From ', style: muted),
+                                      TextSpan(
+                                        text: formatPeso(lowest.price),
+                                        style: theme.textTheme.titleSmall?.copyWith(
+                                            fontWeight: FontWeight.w700, color: theme.colorScheme.primary),
+                                      ),
+                                      TextSpan(text: ' on ${queue.store(lowest.storeId).name}', style: muted),
+                                    ]),
+                                  ),
+                                ],
+                                const SizedBox(height: 6),
+                                StoreStatusSummary(queue: queue, job: job),
+                                if (facts.isNotEmpty) ...[
+                                  const SizedBox(height: 4),
+                                  Text(facts.join(' · '), style: muted),
+                                ],
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            tooltip: job.saved ? 'Unsave' : 'Save this search',
+                            onPressed: () => queue.setSaved(job, !job.saved),
+                            icon: Icon(
+                              job.saved ? Icons.favorite : Icons.favorite_border,
+                              color: job.saved ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (job.isRunning) const LinearProgressIndicator(minHeight: 2),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

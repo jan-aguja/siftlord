@@ -73,8 +73,25 @@ class _ResultsScreenState extends State<ResultsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.job.query),
+        title: ListenableBuilder(
+          listenable: widget.queue,
+          builder: (context, _) => Column(
+            children: [
+              Text(widget.job.query),
+              Text(
+                widget.job.isRunning ? 'Searching…' : 'Updated ${timeAgo(widget.job.updatedAt)}',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant),
+              ),
+            ],
+          ),
+        ),
         actions: [
+          IconButton(
+            tooltip: 'Refresh prices',
+            icon: const Icon(Icons.refresh),
+            onPressed: () => widget.queue.refresh(widget.job, also: widget.settings.enabledStores),
+          ),
           IconButton(
             tooltip: _cards ? 'List view' : 'Card view',
             icon: Icon(_cards ? Icons.view_list : Icons.view_carousel),
@@ -90,7 +107,15 @@ class _ResultsScreenState extends State<ResultsScreen> {
         builder: (context, _) {
           final all = widget.job.items;
           final ref = widget.pricing.check.reference(widget.job.query, all);
-          final items = arrange(all, sort: _sort, hideAds: _hideAds, hiddenStores: _hiddenStores);
+          // Pins first (newest first), then everything else in the chosen order.
+          final pins = widget.job.pins;
+          final pinnedKeys = {for (final p in pins) p.item.key};
+          final items = [
+            for (final p in pins)
+              if (!_hiddenStores.contains(p.item.storeId)) p.item,
+            ...arrange([for (final i in all) if (!pinnedKeys.contains(i.key)) i],
+                sort: _sort, hideAds: _hideAds, hiddenStores: _hiddenStores),
+          ];
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -175,7 +200,9 @@ class _ResultsScreenState extends State<ResultsScreen> {
             item: items[i],
             storeName: _storeName(items[i]),
             verdict: check.verdict(items[i], ref, widget.job.query),
-            ref: ref),
+            ref: ref,
+            pin: widget.job.pinFor(items[i]),
+            onTogglePin: () => _togglePin(items[i])),
       );
     }
     return PageView.builder(
@@ -188,9 +215,22 @@ class _ResultsScreenState extends State<ResultsScreen> {
             item: items[i],
             storeName: _storeName(items[i]),
             verdict: check.verdict(items[i], ref, widget.job.query),
-            ref: ref),
+            ref: ref,
+            pin: widget.job.pinFor(items[i]),
+            onTogglePin: () => _togglePin(items[i])),
       ),
     );
+  }
+
+  void _togglePin(Item item) {
+    final pinning = widget.job.pinFor(item) == null;
+    final hearted = widget.queue.togglePin(widget.job, item);
+    if (pinning) _jumpToStart();
+    final messenger = ScaffoldMessenger.of(context)..hideCurrentSnackBar();
+    if (hearted) {
+      messenger.showSnackBar(const SnackBar(
+          content: Text('Pinned to the top. This search is now hearted, so the pin is kept.')));
+    }
   }
 
   String _storeName(Item item) => widget.queue.store(item.storeId).name;

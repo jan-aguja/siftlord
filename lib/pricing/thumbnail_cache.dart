@@ -22,13 +22,24 @@ class ThumbnailCache extends ChangeNotifier {
   void learnFrom(PriceReference? ref, List<Item> items) {
     final entry = ref?.entry;
     if (ref == null || entry == null || forProduct(entry.id) != null) return;
-    for (final i in items) {
+    final img = officialPhoto(ref, items);
+    if (img == null) return;
+    _prefs.setString(_key(entry.id), img);
+    notifyListeners();
+  }
+
+  /// The photo of the best-ranked official listing that is the product at a
+  /// believable price, so a game titled "Nintendo Switch 2 Yakuza Kiwami"
+  /// can't stand in for the console. Null rather than a guess.
+  static String? officialPhoto(PriceReference? ref, List<Item> items) {
+    if (ref == null) return null;
+    final byRank = [...items]..sort((a, b) => a.rank.compareTo(b.rank));
+    for (final i in byRank) {
       final img = i.imageUrl;
-      if (img != null && i.isOfficial && !i.isAd && ref.claimedBy(i, strict: true)) {
-        _prefs.setString(_key(entry.id), img);
-        notifyListeners();
-        return;
-      }
+      if (img == null || !i.isOfficial || i.isAd) continue;
+      if (i.price < ref.low * PriceCheck.lowFactor || i.price > ref.high * PriceCheck.highFactor) continue;
+      if (ref.claimedBy(i, strict: true)) return img;
     }
+    return null;
   }
 }

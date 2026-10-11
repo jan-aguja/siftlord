@@ -30,10 +30,40 @@ class StoreSettings extends ChangeNotifier {
 
   void setEnabled(String storeId, bool on) {
     _prefs.setBool(_key(storeId), on);
+    if (on) _prefs.setInt(_onAtKey(storeId), DateTime.now().millisecondsSinceEpoch);
     notifyListeners();
   }
 
-  List<StoreAdapter> get enabledStores => [for (final s in stores) if (isEnabled(s.id)) s];
+  static String _onAtKey(String storeId) => 'store_on_at:$storeId';
+
+  /// Stores that are on, most recently turned on first (defaults keep their
+  /// built-in order below those), then the ones that are off. The side menu
+  /// lists them this way, so the stores someone actually uses rise to the top.
+  List<StoreAdapter> get orderedStores {
+    final base = {for (final (i, s) in stores.indexed) s.id: i};
+    int onAt(StoreAdapter s) => _prefs.getInt(_onAtKey(s.id)) ?? 0;
+    final on = [for (final s in stores) if (isEnabled(s.id)) s]
+      ..sort((a, b) {
+        final r = onAt(b).compareTo(onAt(a));
+        return r != 0 ? r : base[a.id]!.compareTo(base[b.id]!);
+      });
+    return [...on, for (final s in stores) if (!isEnabled(s.id)) s];
+  }
+
+  List<StoreAdapter> get enabledStores => [for (final s in orderedStores) if (isEnabled(s.id)) s];
+
+  static const _cleanupKey = 'auto_cleanup_days';
+
+  /// Choices for removing unhearted searches nobody refreshed in a while.
+  static const cleanupChoices = [7, 14, 30, 90];
+
+  /// Days after which unhearted searches go; null (the default) keeps them.
+  int? get autoCleanupDays => _prefs.getInt(_cleanupKey);
+
+  set autoCleanupDays(int? days) {
+    days == null ? _prefs.remove(_cleanupKey) : _prefs.setInt(_cleanupKey, days);
+    notifyListeners();
+  }
 
   MarketplaceCity get marketplaceCity {
     final slug = _prefs.getString(_cityKey);

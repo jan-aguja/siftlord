@@ -6,6 +6,9 @@ Color storeColor(String storeId) => switch (storeId) {
       'lazada' => const Color(0xFF3D5AFE),
       'shopee' => const Color(0xFFEE4D2D),
       'facebook' => const Color(0xFF1877F2),
+      // Zalora's black, lifted a little so it shows on the Dark Side.
+      'zalora' => const Color(0xFF3D3D3D),
+      'datablitz' => const Color(0xFF0017DB),
       _ => Colors.grey,
     };
 
@@ -35,12 +38,25 @@ IconData statusIcon(StoreStatus s) => switch (s) {
       StoreStatus.failed => Icons.error_outline,
     };
 
+/// Both stores mark their official tier with a red pill and white text;
+/// matching it keeps the badge instantly recognizable.
+const mallBadgeColor = Color(0xFFD0011B);
+
 /// What each store calls its official-store tier.
 String mallLabel(String storeId) => switch (storeId) {
       'lazada' => 'LazMall',
       'shopee' => 'Mall',
       _ => 'Official',
     };
+
+/// "just now", "5m ago", "3h ago", "2d ago".
+String timeAgo(DateTime t, {DateTime? now}) {
+  final d = (now ?? DateTime.now()).difference(t);
+  if (d.inMinutes < 1) return 'just now';
+  if (d.inHours < 1) return '${d.inMinutes}m ago';
+  if (d.inDays < 1) return '${d.inHours}h ago';
+  return '${d.inDays}d ago';
+}
 
 String formatPriceRange(double low, double high) =>
     low == high ? formatPeso(low) : '${formatPeso(low)}–${formatPeso(high)}';
